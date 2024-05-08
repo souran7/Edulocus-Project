@@ -1,0 +1,12 @@
+
+# Database
+db.sqlite3
+env/
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+
+
+*.env
+

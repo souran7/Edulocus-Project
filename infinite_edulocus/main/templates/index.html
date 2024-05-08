@@ -1,0 +1,453 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amit</title>
+  <link rel="icon" type="image/png" href="">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/responsive-style.css' %}">
+  
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+
+  <!-- Header -->
+  <header class="header_wrapper">
+    <!-- Announcement Navbar -->
+    <nav class="navbar navbarImp navbar-expand-lg">
+      <div class="container">
+        <h1 class="navbar-brand">Hello, this is an announcement area for upcoming course details with fees</h1>
+      </div>
+    </nav>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'images/infinity.png' %}" class="img-fluid" width="50" alt="Edulocus Logo">
+
+          Edulocus
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="navbar-toggler-icon"><img src="{% static 'images/Menu.PNG' %}" width="40" alt="Menu Icon">
+          </i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCourses" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Courses
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownCourses">
+                <li><a class="dropdown-item" href="#science">Science</a></li>
+                <li><a class="dropdown-item" href="#math">Math</a></li>
+                <li><a class="dropdown-item" href="#commerce">Commerce</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#Contactus">Contact Us</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tel:8292523744">8292523744</a> <!-- Direct call functionality -->
+            </li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown"> <!-- Added dropdown class -->
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Login <!-- Changed text to indicate dropdown -->
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin"> <!-- Dropdown menu -->
+                    <li><a class="dropdown-item"  href="{% url 'login' %}" >Student Login</a></li> <!-- Student login -->
+                    <li><a class="dropdown-item"  href="{% url 'login' %}" >Teacher Login</a></li> <!-- Teacher login -->
+                  </ul>
+                </li>
+              </ul>
+              <!-- this is signUp Feature -->
+
+                <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown"> <!-- Added dropdown class -->
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    signUp <!-- Changed text to indicate dropdown -->
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin"> <!-- Dropdown menu -->
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                        data-bs-target="#popupFormStudentSignUp">Student SignUp</a></li> <!-- Student login -->
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                        data-bs-target="#popupFormTeacherSignUp">Teacher SignUp</a></li> <!-- Teacher login -->
+                  </ul>
+                </li>
+              </ul>
+            </div>
+        </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Sections -->
+  <section id="home" class="home">
+    <!-- Banner Section -->
+    <div class="banner_wrapper wrapper">
+      <div class="container">
+        <!-- Banner Content -->
+        <div class="row align-items-center">
+          <div class="col-md-6 order-md-1 order-2">
+            <h3>Learn from the best</h3>
+            <h1>Teachers from across the world sitting at home</h1>
+            <p>Attend interactive one-on-one classes from top universities like IIT's, BIT's, and NIT's from your home.
+            </p>
+            <a href="#"><button type="button" class="btn btn-danger">Request to Learn</button></a>
+            <a href="#"><button type="button" class="btn btn-danger">Learn More</button></a>
+          </div>
+          <div class="  col-md-6 order-md-2 order-1 mb-md-0 mb-5">
+            <div class="row">
+              <!-- Teacher Image -->
+              <div class="col-md-6">
+                <div class="top-right-sec position-relative" style="height: 100vh; overflow:auto">
+                  <img class="img-fluid moveImageY" src="{% static 'images/teacher.png' %}" alt="Teacher Image" style="max-height: 35vh;">
+
+                </div>
+              </div>
+              <!-- Computer Image -->
+              <div class="col-md-6">
+                <div class="top-left-sec position-relative" style="height: 200px;">
+                  <div class="position-absolute top-0 start-0">
+                    <img class="aimg1 img-fluid" src="{% static 'images/Computerimage.png' %}" alt="Computer Image">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="home1" class="home1">
+    <!-- Top Educators Section -->
+    <div class="wrapper pb-0">
+      <div class="container">
+        <p>Meet our top Educators. Expert teachers from top universities will guide you in all academic needs.</p>
+        <div class="row">
+          <!-- Educator Cards -->
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
+              <div class="icon-box">
+                <img src="{% static 'images/infinity.png' %}" width="300" alt="Teacher Image">
+
+              </div>
+              <div>
+                <h4>Shivani</h4>
+                <p>Madhubani</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
+              <div class="icon-box">
+                <img src="{% static 'images/Menu.PNG' %}" width="300" alt="Teacher Image">
+
+              </div>
+              <div>
+                <h4>Ashwini</h4>
+                <p>Madhubani</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card text-center">
+              <div class="icon-box">
+                <img src="{% static 'images/teacherPro.png' %}" width="300" alt="Teacher Image">
+
+              </div>
+              <div>
+                <h4>Mirtunjay</h4>
+                <p>Patna</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <!-- Registration Section -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Ready to start learning</h2>
+          <p>Create your account now!</p>
+        </div>
+        <div class="col-md-6">
+          <!-- Registration Form -->
+          <form>
+            <div class="mb-3">
+              <label for="type" class="form-label">Role</label>
+              <select class="form-select" id="type">
+                <option value="student">Student</option>
+                <option value="tutorial">Tutorial</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <div class="input-group">
+                <label class="input-group-text" for="country-code">Country Code</label>
+                <select class="form-select" id="country-code">
+                  <option value="+91">+91 (IND)</option>
+                  <option value="+92">+92(PAK)</option>
+                  <option value="+1">+1 (USA)</option>
+                  <option value="+44">+44 (UK)</option>
+                </select>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <hr>
+            <div class="text-center">
+              <!-- Social Media Registration Buttons -->
+              <button type="button" class="btn btn-danger">Register with Google</button>
+              <button type="button" class="btn btn-primary">Register with Facebook</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+   <!-- Login for  Student  Modal -->
+   <div class="modal fade" id="popupFormStudent" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="popupFormLabel">Login For Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6">
+              <!-- Second Column: Login Form -->
+              <form>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" placeholder="Enter username">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <!-- First Column: Image -->
+              <img src="{% static 'images/infinity.png' %}" class="img-fluid" alt="Image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--login for teacher  model-->
+  <div class="modal fade" id="popupFormTeacher" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="popupFormLabel">Login Form for Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6">
+              <!-- Second Column: Login Form -->
+              <form>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" placeholder="Enter username">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <!-- First Column: Image -->
+              <img src="{% static 'images/Menu.png' %}" class="img-fluid" alt="Teacher Image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sign Up  for  Student  Modal -->
+   <div class="modal fade" id="popupFormStudentSignUp" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="popupFormLabel">Sign-Up For Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6">
+              <!-- Second Column: Login Form -->
+              <form>
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                </div>
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+                </div>
+                <div class="mb-3">
+                  <label for="mobile" class="form-label">Mobile No.</label>
+                  <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number">
+                </div>
+                <div class="mb-3">
+                  <label for="qualification" class="form-label">Qualification</label>
+                  <input type="text" class="form-control" id="qualification" placeholder="Enter qualification">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Create Your Account</button>
+              </form>
+              
+            </div>
+            <div class="col-md-6">
+              <!-- First Column: Image -->
+              <img src="{% static 'images/infinity.png' %}" class="img-fluid" alt="Image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Sign Up  for Teacher Model Feature -->
+   <div class="modal fade" id="popupFormTeacherSignUp" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="popupFormLabel">Sign-Up for Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6">
+              <!-- Second Column: Login Form -->
+              <form>
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                </div>
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+                </div>
+                <div class="mb-3">
+                  <label for="mobile" class="form-label">Mobile No.</label>
+                  <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number">
+                </div>
+                <div class="mb-3">
+                  <label for="qualification" class="form-label">Qualification</label>
+                  <input type="text" class="form-control" id="qualification" placeholder="Enter qualification">
+                </div>
+                <div class="mb-3">
+                  <label for="experience" class="form-label">Experience</label>
+                  <input type="text" class="form-control" id="experience" placeholder="Enter experience">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Your Account</button>
+              </form>
+              
+            </div>
+            <div class="col-md-6">
+              <!-- First Column: Image -->
+              <img src="{% static 'images/Menu.png' %}" class="img-fluid" alt="Teacher Image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <!-- Footer -->
+  <footer class="text-center py-2">
+    <p>Main footer content goes here</p>
+    <div class="footer-info">
+      <p>Additional information or parameters go here</p>
+    </div>
+    <p>Author: Hege Refsnes<br>
+      <a href="mailto:praveenjhaazad143@gmail.com">direct complaint HOD</a>
+    </p>
+  </footer>
+
+  <!-- Bootstrap JS (Popper.js is included with Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
+</html>
