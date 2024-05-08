@@ -45,6 +45,7 @@
             <img src="{% static 'LOGO.jpg' %}" alt="Logo">
             
         </div>
+        <p>Log In Successfull</p>
         {% if user.is_authenticated %}
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
