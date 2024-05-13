@@ -53,10 +53,15 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            width: 100%;
+           /* width: calc(50% - 10px); */
             font-size: 14px;
             color: #555;
             box-sizing: border-box;
+        }
+
+        /* Qualifications and Experience fields */
+        .form-control.full-width {
+            width: 100%;
         }
 
         /* Submit button */
@@ -98,27 +103,29 @@
         <div class="modal-content">
             <h2 style="color: #007bff;"><i class="fas fa-user-edit"></i> Update Profile</h2>
             <form id="profileForm">
-                <div class="mb-3">
-                    <label for="gender" class="form-label">Gender</label>
-                    <select class="form-select form-control" id="gender" required>
-                        <option value="" selected disabled>Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="date" class="form-control" id="dob" required>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="width: 48%;">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select form-control" id="gender" required>
+                            <option value="" selected disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div style="width: 48%;">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
                 </div>
                 {% if user_profile.user_type == 'Teacher' %}
                 <div class="mb-3">
                     <label for="qualifications" class="form-label">Qualifications</label>
-                    <input type="text" class="form-control" id="qualifications" required>
+                    <input type="text" class="form-control full-width" id="qualifications" required>
                 </div>
                 <div class="mb-3">
                     <label for="experience" class="form-label">Experience</label>
-                    <input type="number" class="form-control" id="experience" required>
+                    <input type="number" class="form-control full-width" id="experience" required>
                 </div>
                 {% endif %}
                 <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Submit</button>
