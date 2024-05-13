@@ -1,22 +1,12 @@
 
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Set the body height to 100% of the viewport height */
-            margin: 0; /* Remove default margin */
-            position: relative; /* Make the body a relatively positioned container */
-        }
-
         img {
             max-width: 100%; /* Set the maximum width of the image to 100% of its container */
             max-height: 100%; /* Set the maximum height of the image to 100% of its container */
@@ -41,10 +31,7 @@
 
     </style>
     <body>
-        <div class="container">
-            <img src="{% static 'LOGO.jpg' %}" alt="Logo">
-            
-        </div>
+     
         <p>Log In Successfull</p>
         {% if user.is_authenticated %}
         <form action="{% url 'logout' %}" method="post">
@@ -54,5 +41,5 @@
     {% endif %}
     </body>
 
-</html>
+
 

@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<head>
+  <style>
+    button {
+        padding: 15px 30px; /* Increase padding for wider button */
+        border: none;
+        border-radius: 8px;
+        background-color: #002643;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%; /* Make button width 100% */
+        margin-bottom: 10px; /* Add margin below the button */
+    }
+
+    button:hover {
+        background-color: #003965;
+    }
+</style>
+</head>
+<div class="container mt-5">
+  <!-- Sign up form -->
+  <section class="signup">
+      <div class="row justify-content-center">
+          <div class="col-lg-6">
+              <div class="card">
+                  <div class="card-body">
+                      <p style="color: #002643;font-weight: bolder; text-align:center;">Join EduLocus as a</p>
+                      <form method="POST" class="register-form" id="register-form">
+                          {% csrf_token %}
+                          {% if error %}
+                          <div id="error-message" class="alert alert-danger d-none" role="alert">
+                            <!-- Error message will be displayed here -->
+                        </div>
+                          {% endif %}
+                          <div class="mb-3">
+                              <div class="input-group">
+                                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                  <select class="form-select" id="user_type" name="user_type">
+                                      <option value="Student">Student</option>
+                                      <option value="Teacher">Teacher</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                          <div class="mb-3">
+                              <div class="input-group">
+                                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                  <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                              </div>
+                          </div>
+                          <div class="mb-3">
+                              <div class="input-group">
+                                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                  <input type="tel" class="form-control" id="mobile_number" name="mobile_number" placeholder="Mobile Number" required>
+                              </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repeat your password" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                          <div class="mb-3 form-check">
+                              <input type="checkbox" class="form-check-input" id="agree-term" name="agree-term" required>
+                              <label class="form-check-label" for="agree-term">
+                                  <span style="color:black;">I agree all statements in</span>
+                                  <a href="#" style="color:#002643;" class="term-service">Terms of service</a>
+                              </label>
+                          </div>
+                          <div class="text-center">
+                              <button type="submit"id="register-btn" disabled>Register</button>
+                              <div style="text-align: center;">
+                                  <a href="{% url 'login' %}" style="color:#002643;" class="already-member">Already a member?</a>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-6 d-flex align-items-center justify-content-center">
+              <img src="{% static 'images/signup-image.jpg' %}" alt="sign up image" class="img-fluid">
+          </div>
+      </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve error message from template
+    const errorMessage = "{{ error|escapejs }}";
+
+    // Strip extra characters from error message
+    const formattedErrorMessage = errorMessage.replace(/^\[['"](.*)['"]\]$/, '$1');
+
+    // Display error message if present
+    if (formattedErrorMessage.trim() !== "") {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.innerHTML = formattedErrorMessage;
+      errorDiv.classList.remove('d-none');
+
+      // Hide error message after 3 seconds
+      setTimeout(() => {
+        errorDiv.classList.add('d-none');
+      }, 3000);
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const agreeTermCheckbox = document.getElementById('agree-term');
+    const registerButton = document.getElementById('register-btn');
+
+    // Add event listener to the checkbox
+    agreeTermCheckbox.addEventListener('change', function() {
+      // Enable/disable register button based on checkbox status
+      registerButton.disabled = !this.checked;
+    });
+  });
+</script>
+
+{% endblock content %}
