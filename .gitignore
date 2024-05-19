@@ -6,7 +6,19 @@ env/
 !**/migrations
 !**/migrations/__init__.py
 
-
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
 
 *.env
 
+# Django specific files
+*.log
+*.pot
+*.pyc
+*.py[cod]
+*.pyo
+__pycache__/
+*.sqlite3
