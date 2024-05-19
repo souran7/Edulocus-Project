@@ -36,7 +36,7 @@ SECRET_KEY ='0h07n(^mkhld4tthgj%9fj626h$wm36mapajw_t6-!cu+)48l9'
 DEBUG = True
 
 ALLOWED_HOSTS=['*','172.31.33.83','infiniteedulocus.com','wwww.infiniteedulocus.com','35.154.61.89','127.0.0.1']
-CSRF_TRUSTED_ORIGINS=['https://www.infiniteedulocus.com']
+# CSRF_TRUSTED_ORIGINS=['https://www.infiniteedulocus.com']
 LOGIN_URL = 'login'
 
 # Application definition
