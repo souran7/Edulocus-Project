@@ -103,7 +103,7 @@ else:
             'NAME': 'infiniteedulocus',
             'USER': 'infiniteedulocus',
             'PASSWORD': 'A2aNs5w0tL9s8sb2aPse4wtL6ad',
-            'HOST': ' localhost',
+            'HOST': 'localhost',
             'PORT': '5432',
         }
     }
