@@ -64,3 +64,4 @@ class StudentSubject(models.Model):
 
 class Email_Send(models.Model):
     subject = models.TextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
