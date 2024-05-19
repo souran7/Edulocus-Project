@@ -17,12 +17,12 @@
 
     <!-- icons
     ================================================== -->
-    <link rel="stylesheet" href="/static/assets/css/icons.css">
+    <link rel="stylesheet" href="/static/assets_1/css/icons.css">
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="/static/assets/css/uikit.css">
-    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets_1/css/uikit.css">
+    <link rel="stylesheet" href="/static/assets_1/css/style.css">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
@@ -179,7 +179,7 @@
                     <div class="flex-1">
                         <div class="font-semibold mb-0.5 text-base"> {{request.user.first_name}}&nbsp{{request.user.last_name}} </div>
                         <div class="text-sm" style="word-wrap: break-word;">
-                            {{ request.user.email }}
+                            {{ request.user.profile.user_type }}
                         </div>
                         
                     </div>
@@ -201,7 +201,7 @@
                 </div>
 
                 <ul class="border-transparent px-3 py-2 rounded block hover:bg-blue-100" >
-                    <li><a href="dashboard.html">
+                    <li><a href="/main/dashboard">
                             <ion-icon name="home-outline" class="side-icon"></ion-icon>
                             <span> Dashboard </span>
                         </a>
@@ -250,11 +250,11 @@
     <!-- Javascript
     ================================================== -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/static/assets/js/uikit.js"></script>
-    <script src="/static/assets/js/tippy.all.min.js"></script>
-    <script src="/static/assets/js/simplebar.js"></script>
-    <script src="/static/assets/js/custom.js"></script>
-    <script src="/static/assets/js/bootstrap-select.min.js"></script>
+    <script src="/static/assets_1/js/uikit.js"></script>
+    <script src="/static/assets_1/js/tippy.all.min.js"></script>
+    <script src="/static/assets_1/js/simplebar.js"></script>
+    <script src="/static/assets_1/js/custom.js"></script>
+    <script src="/static/assets_1/js/bootstrap-select.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
  
 </body>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     USER_TYPE_CHOICES = [
+        ('Admin', 'Admin'),
         ('Student', 'Student'),
         ('Teacher', 'Teacher'),
     ]
@@ -27,29 +28,32 @@ class Profile(models.Model):
         return f"{self.first_name} {self.last_name}"
     
 
-
 class Student(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
     grade = models.IntegerField(choices=[(i, i) for i in range(6, 13)])
+    subjects = models.ManyToManyField('Subject', through='StudentSubject')
 
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
     experience = models.IntegerField()
     qualifications = models.TextField(blank=True, null=True)
 
-
-
-
-
 class Grade(models.Model):
     grade = models.IntegerField(choices=[(i, i) for i in range(6, 13)])
     subjects = models.ManyToManyField('Subject')
 
+    def __str__(self):
+        subjects_list = ', '.join(str(subject) for subject in self.subjects.all())
+        return f"Grade {self.grade} - Subjects: {subjects_list}"
+
 class Subject(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 class StudentSubject(models.Model):
-    student = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     class Meta:

@@ -25,12 +25,20 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from .models import Profile
+from .models import *
 import re
 import random
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.models import User
 from .forms import NewPasswordForm
+from django.http import JsonResponse
+import json
+from django.db import transaction
+
+
+
+
+
 
 
 
@@ -167,22 +175,91 @@ def sign_up(request):
     return render(request, 'sign_up.html', {'error': error_message})
 
 
-
 @login_required(login_url=LOGIN_URL)
 def dashboard(request):
     # Get the logged-in user's profile
     user_profile = Profile.objects.get(user=request.user)
 
-    # Check if the user's basic details are false
-    show_modal = not user_profile.basic_details
+    # Query all grades
+    grades = Grade.objects.all().values_list('grade', flat=True).distinct()
 
-    # Pass the show_modal flag and user_profile to the template
-    return render(request, 'dashboard.html', {'show_modal': show_modal, 'user_profile': user_profile})
+    # Check if the user is a superuser
+    if request.user.is_superuser:
+        show_modal = False  # Ignore show_modal for superusers
+    else:
+        # Check if the user's basic details are false
+        show_modal = not user_profile.basic_details
 
+    # Pass the show_modal flag, user_profile, and grades to the template
+    return render(request, 'dashboard.html', {'show_modal': show_modal, 'user_profile': user_profile, 'grades': grades})
 
+def get_subjects_for_grade(request, grade):
+    # Query the Grade object for the specified grade
+    try:
+        grade_obj = Grade.objects.get(grade=grade)
+    except Grade.DoesNotExist:
+        return JsonResponse({'error': 'Grade not found'}, status=404)
 
+    # Get the subjects associated with the grade
+    subjects = grade_obj.subjects.all()
 
+    # Serialize subjects data
+    subjects_data = [{'id': subject.id, 'name': subject.name} for subject in subjects]
 
+    # Return JSON response with subjects data
+    return JsonResponse(subjects_data, safe=False)
+
+@csrf_exempt
+def update_profile(request):
+    if request.method == 'POST':
+        # Extract form data from JSON payload
+        data = json.loads(request.body)
+        dob = data.get('dob')
+        gender = data.get('gender')
+        qualifications = data.get('qualifications')
+        experience = data.get('experience')
+        grades = data.get('grades')  # Assuming this is sent from the frontend
+        subjects = data.get('subjects')  # Assuming this is sent from the frontend
+        print(experience)
+
+        # Get the user's profile
+        user_profile = request.user.profile
+
+        # Update profile information
+        user_profile.date_of_birth = dob
+        user_profile.gender = gender
+        user_profile.basic_details = True
+        user_profile.save()
+
+        # Check if user is a student
+        if user_profile.user_type == 'student':
+            # Create Student object
+            with transaction.atomic():
+                student_instance, created = Student.objects.get_or_create(profile=user_profile)
+                if created:  # If the student instance was just created
+                    student_instance.grade = grades
+                    student_instance.save()
+                else:  # If the student instance already exists
+                    student_instance.grade = grades
+                    student_instance.save()
+
+                # Clear existing subjects for the student
+                student_instance.subjects.clear()
+
+                # Add selected subjects to the student
+                for subject_id in subjects:
+                    subject = Subject.objects.get(id=subject_id)
+                    student_instance.subjects.add(subject)
+
+        # Check if user is a teacher
+        elif user_profile.user_type == 'Teacher':
+            # Create Teacher object
+            teacher_profile = Teacher.objects.create(profile=user_profile, qualifications=qualifications, experience=experience)
+
+        return JsonResponse({'message': 'Profile updated successfully'}, status=200)
+
+    # Return error response if request method is not POST
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
 

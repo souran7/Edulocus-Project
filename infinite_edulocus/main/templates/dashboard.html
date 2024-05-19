@@ -62,6 +62,7 @@
         /* Qualifications and Experience fields */
         .form-control.full-width {
             width: 100%;
+            border: 1px solid #ccc;
         }
 
         /* Submit button */
@@ -72,7 +73,7 @@
             padding: 15px;
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
+            background-color: #002643;
             color: #fff;
             font-size: 16px;
             cursor: pointer;
@@ -81,6 +82,11 @@
 
         .btn-submit:hover {
             background-color: #0056b3;
+        }
+        .modal-header{
+            margin-bottom: 25px;
+            background-color: #002643;
+            
         }
     </style>
 </head>
@@ -101,8 +107,13 @@
     <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <h2 style="color: #007bff;"><i class="fas fa-user-edit"></i> Update Profile</h2>
+            <div class="modal-header">
+                <h2 style="color: white; text-align:center;"><i class="fas fa-user-edit"></i> Update Profile</h2>
+                <!-- Close button for the modal -->
+               
+            </div>
             <form id="profileForm">
+                {% csrf_token %}
                 <div style="display: flex; justify-content: space-between;">
                     <div style="width: 48%;">
                         <label for="gender" class="form-label">Gender</label>
@@ -118,17 +129,41 @@
                         <input type="date" class="form-control" id="dob" required>
                     </div>
                 </div>
-                {% if user_profile.user_type == 'Teacher' %}
-                <div class="mb-3">
-                    <label for="qualifications" class="form-label">Qualifications</label>
-                    <input type="text" class="form-control full-width" id="qualifications" required>
+                {% if user_profile.user_type == 'Student' %}
+                <div style="width: 100%;">
+                    <label for="grade" class="form-label">Grade</label>
+                    <select class="form-select form-control" id="grade" required>
+                        <option value="" selected disabled>Select Grade</option>
+                        {% for grade in grades %}
+                            <option value="{{ grade }}">{{ grade }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="mb-3">
-                    <label for="experience" class="form-label">Experience</label>
-                    <input type="number" class="form-control full-width" id="experience" required>
+                
+                <div style="width: 100%;" id="subjectContainer" style="display: none;">
+                    <label for="subjectSelect" class="form-label">Select Subject</label>
+                    <select class="form-select form-control" id="subjectSelect" required disabled>
+                        <option value="" selected disabled>Select Subject</option>
+                        <!-- Subjects will be dynamically populated based on the selected grade -->
+                    </select>
                 </div>
+                <div style="width: 100%; margin-top: 10px;" id="selectsubjectcontainer" style="display: none;">
+                    <input type="text" class="form-control" id="selectedSubjects" style="
+                    color: white;border: 1px solid #ccc;background-color: cadetblue; display: none;" readonly>
+                </div>
+                
                 {% endif %}
-                <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Submit</button>
+                {% if user_profile.user_type == 'Teacher' %}
+                    <div class="mb-3">
+                        <label for="qualifications" class="form-label">Qualifications</label>
+                        <input type="text" class="form-control full-width" id="qualifications" style="border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="experience" class="form-label">Experience</label>
+                        <input type="number" class="form-control full-width" id="experience" style="border: 1px solid #ccc;" required>
+                    </div>
+                {% endif %}
+                <button type="button" id="submitBtn" class="btn btn-submit"><i class="fas fa-save"></i> Submit</button>
             </form>
         </div>
     </div>
@@ -158,5 +193,134 @@ window.onkeydown = function(event) {
     }
 }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            // Prepare form data
+            var formData = {
+                'dob': document.getElementById("dob").value,
+                'gender': document.getElementById("gender").value,
+                'csrfmiddlewaretoken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            };
+            
+            // Check if qualifications field is applicable
+            if (document.getElementById("qualifications")) {
+                formData['qualifications'] = document.getElementById("qualifications").value;
+            }
+            
+            // Check if experience field is applicable
+            if (document.getElementById("experience")) {
+                formData['experience'] = document.getElementById("experience").value;
+            }
+            
+            // Check if grades field is applicable
+            if (document.getElementById("grade")) {
+                formData['grades'] = document.getElementById("grade").value;
+            }
+            
+          
 
+            if (document.getElementById("subjectSelect")) {
+                // Fetch selected subjects
+                var selectedSubjects = document.querySelectorAll('#subjectSelect option:checked');
+                formData['subjects'] = []; // Initialize 'subjects' as an empty array
+                selectedSubjects.forEach(function(option) {
+                    formData['subjects'].push(option.value); // Push selected subject value to the array
+                });
+            }
+
+
+
+    
+            // Send POST request using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/main/update_profile/", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle success response
+                    console.log(xhr.responseText);
+                    location.reload();
+                    // Redirect to dashboard or handle response accordingly
+                }
+            };
+            xhr.send(JSON.stringify(formData));
+        });
+    });
+    
+    
+    </script>
+
+
+ 
+        <script>
+            // Function to fetch subjects based on the selected grade
+            function fetchSubjects() {
+                var grade = document.getElementById('grade').value;
+                if (grade) {
+                    document.getElementById('subjectContainer').style.display = 'block'; // Show subject container
+                    
+                    document.getElementById('selectedSubjects').style.display = 'block';
+                    document.getElementById('selectsubjectcontainer').style.display = 'block';
+                    var subjectSelect = document.getElementById('subjectSelect');
+                    subjectSelect.disabled = false; // Enable subject select
+                    fetch(`/main/api/grades/${grade}/subjects/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            subjectSelect.innerHTML = ''; // Clear existing options
+                            var selectedSubjects = []; // Array to store selected subjects
+        
+                            // Add default "Select Subject" option
+                            var defaultOption = document.createElement('option');
+                            defaultOption.value = "";
+                            defaultOption.textContent = "Select Subject";
+                            subjectSelect.appendChild(defaultOption);
+        
+                            data.forEach(subject => {
+                                var option = document.createElement('option');
+                                option.value = subject.id;
+                                option.textContent = subject.name;
+                                // Check if the subject is already selected
+                                if (selectedSubjects.includes(subject.id)) {
+                                    option.disabled = true; // Disable the option if already selected
+                                }
+                                subjectSelect.appendChild(option);
+                            });
+        
+                            // Event listener for subject selection
+                            subjectSelect.addEventListener('change', function() {
+                                var selectedSubject = subjectSelect.value;
+                                var selectedSubjectText = subjectSelect.options[subjectSelect.selectedIndex].text;
+                                var selectedSubjectsInput = document.getElementById('selectedSubjects');
+                                if (selectedSubject) {
+                                    if (selectedSubjectsInput.value === "") {
+                                        selectedSubjectsInput.value = selectedSubjectText;
+                                    } else {
+                                        selectedSubjectsInput.value += ", " + selectedSubjectText;
+                                    }
+                                    // Add the selected subject to the array of selected subjects
+                                    selectedSubjects.push(selectedSubject);
+                                    // Disable the selected option to prevent selecting it again
+                                    subjectSelect.options[subjectSelect.selectedIndex].disabled = true;
+                                    // Disable the default "Select Subject" option
+                                    subjectSelect.options[0].disabled = true;
+                                }
+                            });
+                        })
+                        .catch(error => console.error('Error fetching subjects:', error));
+                } else {
+                    document.getElementById('subjectContainer').style.display = 'none'; // Hide subject container if no grade selected
+                }
+            }
+        
+            // Event listener to fetch subjects when grade is selected
+            document.getElementById('grade').addEventListener('change', fetchSubjects);
+        
+            // Initial fetch of subjects based on default selected grade
+            fetchSubjects();
+        </script>
+
+    
+
+    
 {% endblock content %}
