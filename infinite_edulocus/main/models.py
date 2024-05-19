@@ -58,3 +58,9 @@ class StudentSubject(models.Model):
 
     class Meta:
         unique_together = ['student', 'subject']
+
+
+
+
+class Email_Send(models.Model):
+    subject = models.TextField(blank=True, null=True)
