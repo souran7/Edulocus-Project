@@ -98,12 +98,12 @@ else:
     # Server configuration
     DATABASES = {
         'default': {
-            'ENGINE': '',
-            'NAME': '',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'infiniteedulocus',
+            'USER': 'infiniteedulocus',
+            'PASSWORD': 'A2aNs5w0tL9s8sb2aPse4wtL6ad',
+            'HOST': ' localhost',
+            'PORT': '5432',
         }
     }
 
