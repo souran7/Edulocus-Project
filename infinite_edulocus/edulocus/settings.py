@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'edulocus.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 IS_LOCAL = eval(os.environ.get('LOCAL', 'False'))
-IS_PRODUCTION = eval(os.environ.get('LOCAL', 'True'))
+IS_PRODUCTION = eval(os.environ.get('PRODUCTION', 'True'))
 
 # Determine database configuration based on environment
 if IS_LOCAL:
