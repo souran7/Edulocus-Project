@@ -176,10 +176,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587  # Default SMTP port
-EMAIL_USE_TLS = True  # TLS (Transport Layer Security) encryption
-EMAIL_HOST_USER = 'infiniteedulocus@gmail.com'  # Your SMTP username
-EMAIL_HOST_PASSWORD = 'Mkumar@123'  # Your SMTP password
+
+
+
+
+
+
+# AWS Settings
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+
+# Email Backend
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+
+# AWS SES Settings
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
