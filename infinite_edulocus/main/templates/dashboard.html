@@ -1,0 +1,326 @@
+{% extends "final_base.html" %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    <style>
+        /* Style the overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            display: none; /* Initially hidden */
+            z-index: 1000; /* Higher z-index than modal */
+        }
+
+        /* Style the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001; /* Higher z-index than overlay */
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            border: 1px solid #ddd;
+            max-width: 80%;
+            width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Modal content */
+        .modal-content {
+            margin-top: 20px;
+        }
+
+        /* Form fields */
+        .form-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+           /* width: calc(50% - 10px); */
+            font-size: 14px;
+            color: #555;
+            box-sizing: border-box;
+        }
+
+        /* Qualifications and Experience fields */
+        .form-control.full-width {
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        /* Submit button */
+        .btn-submit {
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #002643;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .modal-header{
+            margin-bottom: 25px;
+            background-color: #002643;
+            
+        }
+    </style>
+</head>
+
+<div class="main_content" style="height:100vh;">
+    <div class="content-wrapper" style="background-color:#002643; height:90vh;">
+        <div>
+            <h1 style="color:white;">{{ show_modal }}</h1>
+        </div>
+    </div>      
+    {% include 'footer.html' %}
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    {% if show_modal %}
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: white; text-align:center;"><i class="fas fa-user-edit"></i> Update Profile</h2>
+                <!-- Close button for the modal -->
+               
+            </div>
+            <form id="profileForm">
+                {% csrf_token %}
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="width: 48%;">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-select form-control" id="gender" required>
+                            <option value="" selected disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div style="width: 48%;">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+                </div>
+                {% if user_profile.user_type == 'Student' %}
+                <div style="width: 100%;">
+                    <label for="grade" class="form-label">Grade</label>
+                    <select class="form-select form-control" id="grade" required>
+                        <option value="" selected disabled>Select Grade</option>
+                        {% for grade in grades %}
+                            <option value="{{ grade }}">{{ grade }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div style="width: 100%;" id="subjectContainer" style="display: none;">
+                    <label for="subjectSelect" class="form-label">Select Subject</label>
+                    <select class="form-select form-control" id="subjectSelect" required disabled>
+                        <option value="" selected disabled>Select Subject</option>
+                        <!-- Subjects will be dynamically populated based on the selected grade -->
+                    </select>
+                </div>
+                <div style="width: 100%; margin-top: 10px;" id="selectsubjectcontainer" style="display: none;">
+                    <input type="text" class="form-control" id="selectedSubjects" style="
+                    color: white;border: 1px solid #ccc;background-color: cadetblue; display: none;" readonly>
+                </div>
+                
+                {% endif %}
+                {% if user_profile.user_type == 'Teacher' %}
+                    <div class="mb-3">
+                        <label for="qualifications" class="form-label">Qualifications</label>
+                        <input type="text" class="form-control full-width" id="qualifications" style="border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="experience" class="form-label">Experience</label>
+                        <input type="number" class="form-control full-width" id="experience" style="border: 1px solid #ccc;" required>
+                    </div>
+                {% endif %}
+                <button type="button" id="submitBtn" class="btn btn-submit"><i class="fas fa-save"></i> Submit</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+// Get the modal and overlay elements
+var modal = document.getElementById("myModal");
+var overlay = document.getElementById("overlay");
+
+// Display modal and overlay if show_modal is true
+if (modal) {
+    modal.style.display = "block";
+    overlay.style.display = "block";
+}
+
+// Prevent modal from closing on click outside or pressing ESC key
+overlay.onclick = function(event) {
+    if (event.target === overlay) {
+        // Do nothing
+    }
+}
+window.onkeydown = function(event) {
+    if (event.key === "Escape") {
+        // Do nothing
+    }
+}
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            // Prepare form data
+            var formData = {
+                'dob': document.getElementById("dob").value,
+                'gender': document.getElementById("gender").value,
+                'csrfmiddlewaretoken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            };
+            
+            // Check if qualifications field is applicable
+            if (document.getElementById("qualifications")) {
+                formData['qualifications'] = document.getElementById("qualifications").value;
+            }
+            
+            // Check if experience field is applicable
+            if (document.getElementById("experience")) {
+                formData['experience'] = document.getElementById("experience").value;
+            }
+            
+            // Check if grades field is applicable
+            if (document.getElementById("grade")) {
+                formData['grades'] = document.getElementById("grade").value;
+            }
+            
+          
+
+            if (document.getElementById("subjectSelect")) {
+                // Fetch selected subjects
+                var selectedSubjects = document.querySelectorAll('#subjectSelect option:checked');
+                formData['subjects'] = []; // Initialize 'subjects' as an empty array
+                selectedSubjects.forEach(function(option) {
+                    formData['subjects'].push(option.value); // Push selected subject value to the array
+                });
+            }
+
+
+
+    
+            // Send POST request using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/main/update_profile/", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle success response
+                    console.log(xhr.responseText);
+                    location.reload();
+                    // Redirect to dashboard or handle response accordingly
+                }
+            };
+            xhr.send(JSON.stringify(formData));
+        });
+    });
+    
+    
+    </script>
+
+
+ 
+        <script>
+            // Function to fetch subjects based on the selected grade
+            function fetchSubjects() {
+                var grade = document.getElementById('grade').value;
+                if (grade) {
+                    document.getElementById('subjectContainer').style.display = 'block'; // Show subject container
+                    
+                    document.getElementById('selectedSubjects').style.display = 'block';
+                    document.getElementById('selectsubjectcontainer').style.display = 'block';
+                    var subjectSelect = document.getElementById('subjectSelect');
+                    subjectSelect.disabled = false; // Enable subject select
+                    fetch(`/main/api/grades/${grade}/subjects/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            subjectSelect.innerHTML = ''; // Clear existing options
+                            var selectedSubjects = []; // Array to store selected subjects
+        
+                            // Add default "Select Subject" option
+                            var defaultOption = document.createElement('option');
+                            defaultOption.value = "";
+                            defaultOption.textContent = "Select Subject";
+                            subjectSelect.appendChild(defaultOption);
+        
+                            data.forEach(subject => {
+                                var option = document.createElement('option');
+                                option.value = subject.id;
+                                option.textContent = subject.name;
+                                // Check if the subject is already selected
+                                if (selectedSubjects.includes(subject.id)) {
+                                    option.disabled = true; // Disable the option if already selected
+                                }
+                                subjectSelect.appendChild(option);
+                            });
+        
+                            // Event listener for subject selection
+                            subjectSelect.addEventListener('change', function() {
+                                var selectedSubject = subjectSelect.value;
+                                var selectedSubjectText = subjectSelect.options[subjectSelect.selectedIndex].text;
+                                var selectedSubjectsInput = document.getElementById('selectedSubjects');
+                                if (selectedSubject) {
+                                    if (selectedSubjectsInput.value === "") {
+                                        selectedSubjectsInput.value = selectedSubjectText;
+                                    } else {
+                                        selectedSubjectsInput.value += ", " + selectedSubjectText;
+                                    }
+                                    // Add the selected subject to the array of selected subjects
+                                    selectedSubjects.push(selectedSubject);
+                                    // Disable the selected option to prevent selecting it again
+                                    subjectSelect.options[subjectSelect.selectedIndex].disabled = true;
+                                    // Disable the default "Select Subject" option
+                                    subjectSelect.options[0].disabled = true;
+                                }
+                            });
+                        })
+                        .catch(error => console.error('Error fetching subjects:', error));
+                } else {
+                    document.getElementById('subjectContainer').style.display = 'none'; // Hide subject container if no grade selected
+                }
+            }
+        
+            // Event listener to fetch subjects when grade is selected
+            document.getElementById('grade').addEventListener('change', fetchSubjects);
+        
+            // Initial fetch of subjects based on default selected grade
+            fetchSubjects();
+        </script>
+
+    
+
+    
+{% endblock content %}

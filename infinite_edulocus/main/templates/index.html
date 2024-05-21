@@ -1,453 +1,445 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amit</title>
-  <link rel="icon" type="image/png" href="">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/responsive-style.css' %}">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite EduLocus</title>
+    <!-- font family  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <!-- <link href="css/all.min.css" rel="stylesheet" /> -->
+    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="static/assets/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="static/assets/css/owl.theme.default.min.css" rel="stylesheet" />
+    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+    <link href="static/assets/css/style-two.css" rel="stylesheet" />
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+<body>
+    <!-- header section start -->
+    <div class="top-header">
+        <div class="offer-box">
+            <marquee>
+                <div class="item">
+                    <a class="para-mute" href="#">
+                        Free Education for all
+                    </a>
+                </div>
+            </marquee>
+        </div>
+    </div>
 
-  <!-- Header -->
-  <header class="header_wrapper">
-    <!-- Announcement Navbar -->
-    <nav class="navbar navbarImp navbar-expand-lg">
-      <div class="container">
-        <h1 class="navbar-brand">Hello, this is an announcement area for upcoming course details with fees</h1>
-      </div>
-    </nav>
-
-    <!-- Main Navbar -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="{% static 'images/infinity.png' %}" class="img-fluid" width="50" alt="Edulocus Logo">
-
-          Edulocus
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="navbar-toggler-icon"><img src="{% static 'images/Menu.PNG' %}" width="40" alt="Menu Icon">
-          </i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCourses" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Courses
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownCourses">
-                <li><a class="dropdown-item" href="#science">Science</a></li>
-                <li><a class="dropdown-item" href="#math">Math</a></li>
-                <li><a class="dropdown-item" href="#commerce">Commerce</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#Contactus">Contact Us</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tel:8292523744">8292523744</a> <!-- Direct call functionality -->
-            </li>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav me-auto">
-                <li class="nav-item dropdown"> <!-- Added dropdown class -->
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Login <!-- Changed text to indicate dropdown -->
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin"> <!-- Dropdown menu -->
-                    <li><a class="dropdown-item"  href="{% url 'login' %}" >Student Login</a></li> <!-- Student login -->
-                    <li><a class="dropdown-item"  href="{% url 'login' %}" >Teacher Login</a></li> <!-- Teacher login -->
-                  </ul>
-                </li>
-              </ul>
-              <!-- this is signUp Feature -->
-
-                <ul class="navbar-nav me-auto">
-                <li class="nav-item dropdown"> <!-- Added dropdown class -->
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLogin" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    signUp <!-- Changed text to indicate dropdown -->
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownLogin"> <!-- Dropdown menu -->
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                        data-bs-target="#popupFormStudentSignUp">Student SignUp</a></li> <!-- Student login -->
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                        data-bs-target="#popupFormTeacherSignUp">Teacher SignUp</a></li> <!-- Teacher login -->
-                  </ul>
-                </li>
-              </ul>
+    <!-- nanbar -->
+    <nav class="navbar navbar-expand-lg main-nav ">
+        <div class="container-fluid">
+            <a class="navbar-brand header-logo" href="#"><img src="static/assets/images/logo-light.png" alt=""></a>
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Home
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">page link</a></li>
+                            <li><a class="dropdown-item" href="#">page link</a></li>
+                            <li><a class="dropdown-item" href="#">page link</a></li>
+                            <li><a class="dropdown-item" href="#">page link</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav login-btn-box ">
+                    <li><a href="#" class="mobile-no">+123456789</a></li>
+                    <li><a href="#" class="login-btn">Log In</a></li>
+                    <li><a href="#" class="login-btn sign-up">Sign Up</a></li>
+                </ul>
             </div>
         </div>
+        </div>
     </nav>
-  </header>
+    <!-- navbar -->
+    <!-- banner start -->
+    <!-- banner sec start -->
+    <section class="banner-sec">
+        <div class="container">
+            <div class="row g-lg-3 g-5">
+                <div class="col-md-6">
+                    <div class="banner-left">
+                        <h1 class="banner-title">Learn live from the best teachers</h1>
+                        <p class="para-mute">
+                            Attend interactive One-on-One classes from subject experts from top universities like IITs,
+                            BITS, IISc and NITs from your home.
+                            <br>
+                            Request your first lesson today!
+                        </p>
+                        <a href="#" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
 
-  <!-- Main Content Sections -->
-  <section id="home" class="home">
-    <!-- Banner Section -->
-    <div class="banner_wrapper wrapper">
-      <div class="container">
-        <!-- Banner Content -->
-        <div class="row align-items-center">
-          <div class="col-md-6 order-md-1 order-2">
-            <h3>Learn from the best</h3>
-            <h1>Teachers from across the world sitting at home</h1>
-            <p>Attend interactive one-on-one classes from top universities like IIT's, BIT's, and NIT's from your home.
-            </p>
-            <a href="#"><button type="button" class="btn btn-danger">Request to Learn</button></a>
-            <a href="#"><button type="button" class="btn btn-danger">Learn More</button></a>
-          </div>
-          <div class="  col-md-6 order-md-2 order-1 mb-md-0 mb-5">
+                </div> <!--./col-md-6-->
+                <div class="col-md-6">
+                    <div class="banner-img">
+                        <img src="static/assets/images/banner-img.png" alt="">
+                    </div>
+                </div>
+            </div><!--./row-->
+        </div><!--./container-->
+    </section>
+    <!-- banner sec end -->
+    <!-- main-one -->
+    <section class="banner-sec main-one">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="banner-left">
+                        <div class="title-wrapper">
+
+                            <h2 class="banner-title"> Learn from the best teachers from across the world sitting at home
+                                teacher student
+                            </h2>
+                            <img src="static/assets/images/sev-one.svg" alt="this is svg image for title">
+                        </div>
+                        <p class="para-mute">
+                            Vidyalai's teachers are selected after a rigorous interview process - only the best,
+                            experienced teachers make the final cut. Our IB and IGCSE tutors are experts in the
+                            curricula and have extensive experience in training students from all over the world. We
+                            offer live One-to-One classes, tailor made to your requirements, ensuring that you get the
+                            teacher's undivided attention. From catching up on a topic to get an extra advantage over
+                            your peers, our classes will help you go the extra mile. Our state of the art online
+                            classrooms makes learning fun and engaging, and ensures that your learning experience is
+                            seamless.
+                        </p>
+                        <a href="#" class="main-btn">Check out the online classroom <i
+                                class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+
+                </div> <!--./col-md-6-->
+                <div class="col-md-6">
+                    <div class="banner-img">
+                        <img src="static/assets/images/main-one.png" alt="">
+                    </div>
+                </div>
+            </div><!--./row-->
+        </div><!--./container-->
+    </section>
+    <!-- main one end -->
+    <!-- card section -->
+    <section class="card-sec">
+        <div class="container">
             <div class="row">
-              <!-- Teacher Image -->
-              <div class="col-md-6">
-                <div class="top-right-sec position-relative" style="height: 100vh; overflow:auto">
-                  <img class="img-fluid moveImageY" src="{% static 'images/teacher.png' %}" alt="Teacher Image" style="max-height: 35vh;">
-
+                <div class="col-lg-12">
+                    <h2 class="main-header">
+                        How do I attend lessons on Vidyalai?
+                    </h2>
+                    <p class="para-mute">Learn how you can attend one-on-one or group classes, tailor made to your
+                        requirements.</p>
                 </div>
-              </div>
-              <!-- Computer Image -->
-              <div class="col-md-6">
-                <div class="top-left-sec position-relative" style="height: 200px;">
-                  <div class="position-absolute top-0 start-0">
-                    <img class="aimg1 img-fluid" src="{% static 'images/Computerimage.png' %}" alt="Computer Image">
-
-                  </div>
+            </div> <!--./row-->
+            <div class="row g-lg-5 g-3">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="num-box">
+                            <span>1</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Request a Lesson</h5>
+                            <p class="para-mute">Tell us what you need help with. We will connect you with an
+                                experienced teacher, and set up the first lesson.</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                    </div><!--./card-->
+                </div><!--./col-md-4-->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="num-box">
+                            <span>2</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Attend the First Class</h5>
+                            <p class="para-mute">Tell us what you need help with. We will connect you with an
+                                experienced teacher, and set up the first lesson.</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                    </div><!--./card-->
+                </div><!--./col-md-4-->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="num-box">
+                            <span>3</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Enjoy Learning!</h5>
+                            <p class="para-mute">Tell us what you need help with. We will connect you with an
+                                experienced teacher, and set up the first lesson.</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                    </div><!--./card-->
+                </div><!--./col-md-4-->
+            </div><!--./row-->
+            <a href="#" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div><!-- ./container-->
+    </section>
+    <!-- card sec end -->
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="main-header">
+                        Meet our Teachers
+                    </h2>
+                    <p class="para-mute">Expert teachers from top universities will guide you in all your academic needs
+                    </p>
                 </div>
-              </div>
+            </div> <!--./row-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="customers-testimonials" class="owl-carousel">
+
+                        <!--TESTIMONIAL 1 -->
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
+                                <h3 class="t-name">Geetha</h3>
+                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                                <p class="subject">Chemistry Wizard</p>
+                            </div>
+                        </div>
+                        <!--END OF TESTIMONIAL 1 -->
+                        <!--TESTIMONIAL 2 -->
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
+                                <h3 class="t-name">Geetha</h3>
+                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                                <p class="subject">Chemistry Wizard</p>
+                            </div>
+                        </div>
+                        <!--END OF TESTIMONIAL 2 -->
+                        <!--TESTIMONIAL 3 -->
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="static/assets/images/t-three.jpg" alt="">
+                                <h3 class="t-name">Geetha</h3>
+                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                                <p class="subject">Chemistry Wizard</p>
+                            </div>
+                        </div>
+                        <!--END OF TESTIMONIAL 3 -->
+                        <!--TESTIMONIAL 4 -->
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
+                                <h3 class="t-name">Geetha</h3>
+                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                                <p class="subject">Chemistry Wizard</p>
+                            </div>
+                        </div>
+                        <!--END OF TESTIMONIAL 4 -->
+                        <!--TESTIMONIAL 5 -->
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
+                                <h3 class="t-name">Geetha</h3>
+                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                                <p class="subject">Chemistry Wizard</p>
+                            </div>
+                        </div>
+                        <!--END OF TESTIMONIAL 5 -->
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    
+    <!-- footer start -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer-left-logo">
+                        <figure>
+                            <a href="#" class="footer-logo"><img src="static/assets/images/icon-logo.png" class="img-fluid"
+                                    alt=""></a>
+                        </figure>
+                        <h5 class="para-mute">
+                            Vidyalai is an online tutoring platform with qualified teachers from top universities across
+                            the
+                            globe. We provide live One-on-One classes, which take place on our online classroom, which
+                            has
+                            an online video chat and a shared whiteboard. The teacher and the student can interact with
+                            each
+                            other through the video chat and write on the shared whiteboard
+                            <br>
+                            Vidyalai gives you access to the best teachers in the world, without any constraints on
+                            geography. Once you request a lesson, we will match you to a highly qualified personal
+                            tutor,
+                            who will take the first lesson. Once you are satisfied with the first lesson, your dedicated
+                            academic counsellor will chart a detailed academic plan, tailormade for you.
 
-  <section id="home1" class="home1">
-    <!-- Top Educators Section -->
-    <div class="wrapper pb-0">
-      <div class="container">
-        <p>Meet our top Educators. Expert teachers from top universities will guide you in all academic needs.</p>
-        <div class="row">
-          <!-- Educator Cards -->
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card text-center">
-              <div class="icon-box">
-                <img src="{% static 'images/infinity.png' %}" width="300" alt="Teacher Image">
+                        </h5>
+                    </div>
 
-              </div>
-              <div>
-                <h4>Shivani</h4>
-                <p>Madhubani</p>
-              </div>
+
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <h4 class="footer-link-header">QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="#" class="para-mute">Home</a></li>
+                        <li><a href="#" class="para-mute">Contact</a></li>
+                        <li><a href="#" class="para-mute">About Us</a></li>
+                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
+                        <li><a href="#" class="para-mute">Privacy</a></li>
+                        <li><a href="#" class="para-mute">Contact</a></li>
+                        <li><a href="#" class="para-mute">About Us</a></li>
+                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
+                        <li><a href="#" class="para-mute">Privacy</a></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <h4 class="footer-link-header">QUICK LINKS</h4>
+
+                    <ul>
+                        <li><a href="#" class="para-mute">Terms &amp; Conditions</a></li>
+                        <li><a href="#" class="para-mute">Cookie Policy</a></li>
+                        <li><a href="#" class="para-mute">Contact</a></li>
+                        <li><a href="#" class="para-mute">About Us</a></li>
+                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
+                        <li><a href="#" class="para-mute">Privacy</a></li>
+                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
+                        <li><a href="#" class="para-mute">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4">
+                    <h4 class="footer-link-header">GET IN touch</h4>
+
+                    <ul>
+                        <li><a href="#" class="para-mute"> <i class="fa-solid fa-phone"></i>+91-80751-02591</a></li>
+                        <li><a href="#" class="para-mute"> <i class="fa-regular fa-envelope"></i>help@vidyalai.com</a>
+                        </li>
+                        <li class="para-mute">address Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Obcaecati, itaque. Fugiat, excepturi?</li>
+                    </ul>
+                    <ul class="social-media">
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+                    </ul>
+                    <div class="app-link">
+                        <a href="#" class="apple">
+                            <img src="static/assets/images/apple.svg" alt="">
+                        </a>
+                        <a href="#" class="android">
+                            <img src="static/assets/images/and.svg" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card text-center">
-              <div class="icon-box">
-                <img src="{% static 'images/Menu.PNG' %}" width="300" alt="Teacher Image">
-
-              </div>
-              <div>
-                <h4>Ashwini</h4>
-                <p>Madhubani</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card text-center">
-              <div class="icon-box">
-                <img src="{% static 'images/teacherPro.png' %}" width="300" alt="Teacher Image">
-
-              </div>
-              <div>
-                <h4>Mirtunjay</h4>
-                <p>Patna</p>
-              </div>
-            </div>
-          </div>
+            <hr class="footer-hr">
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="copy-right">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-box">
 
-  <section>
-    <!-- Registration Section -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Ready to start learning</h2>
-          <p>Create your account now!</p>
+                            <div class="footer-left">
+
+                                <small class="content"><a class="para-mute" href="#">Terms &amp; Conditions
+                                        |</a></small>
+
+                                <small class="content"><a class="para-mute" href="#">Privacy Policy |</a></small>
+
+                                <small class="content">© 2024, <a class="para-mute" href="#" title="">vidya </a></small>
+
+                            </div>
+                            <div class="footer-right">
+                                <p class="para-mute">If you need any help or support, please contact us at
+                                    support@sample.com.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-          <!-- Registration Form -->
-          <form>
-            <div class="mb-3">
-              <label for="type" class="form-label">Role</label>
-              <select class="form-select" id="type">
-                <option value="student">Student</option>
-                <option value="tutorial">Tutorial</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Enter your name">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter your email">
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">Phone</label>
-              <div class="input-group">
-                <label class="input-group-text" for="country-code">Country Code</label>
-                <select class="form-select" id="country-code">
-                  <option value="+91">+91 (IND)</option>
-                  <option value="+92">+92(PAK)</option>
-                  <option value="+1">+1 (USA)</option>
-                  <option value="+44">+44 (UK)</option>
-                </select>
-                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <hr>
-            <div class="text-center">
-              <!-- Social Media Registration Buttons -->
-              <button type="button" class="btn btn-danger">Register with Google</button>
-              <button type="button" class="btn btn-primary">Register with Facebook</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
+    <!-- footer end -->
 
-  
-   <!-- Login for  Student  Modal -->
-   <div class="modal fade" id="popupFormStudent" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="popupFormLabel">Login For Student</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
+    <!-- script -->
+    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/owl.carousel.min.js"></script>
 
-            <div class="col-md-6">
-              <!-- Second Column: Login Form -->
-              <form>
-                <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Enter username">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter password">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <!-- First Column: Image -->
-              <img src="{% static 'images/infinity.png' %}" class="img-fluid" alt="Image">
+    <!-- <script src="js/custom.js"></script> -->
+    <script src="static/assets/js/custom-two.js"></script>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--login for teacher  model-->
-  <div class="modal fade" id="popupFormTeacher" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="popupFormLabel">Login Form for Teacher</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-
-            <div class="col-md-6">
-              <!-- Second Column: Login Form -->
-              <form>
-                <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Enter username">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter password">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-              </form>
-            </div>
-            <div class="col-md-6">
-              <!-- First Column: Image -->
-              <img src="{% static 'images/Menu.png' %}" class="img-fluid" alt="Teacher Image">
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Sign Up  for  Student  Modal -->
-   <div class="modal fade" id="popupFormStudentSignUp" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="popupFormLabel">Sign-Up For Student</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-
-            <div class="col-md-6">
-              <!-- Second Column: Login Form -->
-              <form>
-                <div class="mb-3">
-                  <label for="firstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
-                </div>
-                <div class="mb-3">
-                  <label for="lastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter password">
-                </div>
-                <div class="mb-3">
-                  <label for="confirmPassword" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
-                </div>
-                <div class="mb-3">
-                  <label for="mobile" class="form-label">Mobile No.</label>
-                  <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number">
-                </div>
-                <div class="mb-3">
-                  <label for="qualification" class="form-label">Qualification</label>
-                  <input type="text" class="form-control" id="qualification" placeholder="Enter qualification">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Create Your Account</button>
-              </form>
-              
-            </div>
-            <div class="col-md-6">
-              <!-- First Column: Image -->
-              <img src="{% static 'images/infinity.png' %}" class="img-fluid" alt="Image">
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Sign Up  for Teacher Model Feature -->
-   <div class="modal fade" id="popupFormTeacherSignUp" tabindex="-1" aria-labelledby="popupFormLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="popupFormLabel">Sign-Up for Teacher</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-
-            <div class="col-md-6">
-              <!-- Second Column: Login Form -->
-              <form>
-                <div class="mb-3">
-                  <label for="firstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
-                </div>
-                <div class="mb-3">
-                  <label for="lastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter password">
-                </div>
-                <div class="mb-3">
-                  <label for="confirmPassword" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
-                </div>
-                <div class="mb-3">
-                  <label for="mobile" class="form-label">Mobile No.</label>
-                  <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number">
-                </div>
-                <div class="mb-3">
-                  <label for="qualification" class="form-label">Qualification</label>
-                  <input type="text" class="form-control" id="qualification" placeholder="Enter qualification">
-                </div>
-                <div class="mb-3">
-                  <label for="experience" class="form-label">Experience</label>
-                  <input type="text" class="form-control" id="experience" placeholder="Enter experience">
-                </div>
-                <button type="submit" class="btn btn-primary">Create Your Account</button>
-              </form>
-              
-            </div>
-            <div class="col-md-6">
-              <!-- First Column: Image -->
-              <img src="{% static 'images/Menu.png' %}" class="img-fluid" alt="Teacher Image">
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-
-
-  <!-- Footer -->
-  <footer class="text-center py-2">
-    <p>Main footer content goes here</p>
-    <div class="footer-info">
-      <p>Additional information or parameters go here</p>
-    </div>
-    <p>Author: Hege Refsnes<br>
-      <a href="mailto:praveenjhaazad143@gmail.com">direct complaint HOD</a>
-    </p>
-  </footer>
-
-  <!-- Bootstrap JS (Popper.js is included with Bootstrap) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            //  TESTIMONIALS CAROUSEL HOOK
+            $('#customers-testimonials').owlCarousel({
+                loop: true,
+                center: true,
+                items: 3,
+                margin: 0,
+                autoplay: true,
+                dots: true,
+                autoplayTimeout: 8500,
+                smartSpeed: 450,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    1170: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

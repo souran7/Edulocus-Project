@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>{% block title %}Infinite EduLocus{% endblock %}</title>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Courseplus is - Professional A unique and beautiful collection of UI elements">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
+
+    <!-- icons
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'assets_1/css/icons.css' %}">
+
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" href="{% static 'assets_1/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_1/css/style.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+</head>
+
+<body>
+
+    <div id="wrapper" class="is-verticle">
+
+        <!--  Header  -->
+        <header uk-sticky> 
+            <div class="header_inner">
+                <div class="left-side" style="padding:0 0;">
+    
+                    <!-- Logo -->
+                    <div id="logo" style="background-color:#002643; height:100%; width:100%; margin-right:0;">
+                        <a href="dashboard.html">
+                            {% comment %} <h1 style="color:white;width:300px;height: 50px;text-align: center;margin-top: 18px;">Infinite EduLocus</h1> {% endcomment %}
+                            <img  src="/static/images/EdulocusLt.png" style="    height: 60px;
+                            margin-left: 5px;
+                            margin-top: 6px;">
+                            <img src="/static/images/EdulocusLt.png" class="logo_inverse" alt="">
+                            <img src="/static/images/EdulocusLt.png" class="logo_mobile" alt=""> 
+                           
+                        </a>
+                    </div>
+                    <!-- icon menu for mobile -->
+                    <div class="triger" uk-toggle="target: #wrapper ; cls: is-active"> 
+                    </div>
+    
+                </div>
+                <div class="right-side">
+     
+                    <!-- Header search box  -->
+                    <div class="header_search"><i class="uil-search-alt"></i> 
+                        <input value="" type="text" class="form-control" placeholder=" Quick search for anything.." autocomplete="off">
+                        <div uk-drop="mode: click;offset:10" class="header_search_dropdown">
+                               
+                            <h4 class="search_title"> Recently </h4>
+                           
+    
+                        </div>
+                    </div>
+                     
+                    <div>
+
+                        <!-- search icon for mobile -->
+                        <div class="header-search-icon" uk-toggle="target: #wrapper ; cls: show-searchbox"> </div>
+ 
+        
+                                                
+        
+                        <!-- profile -->
+                        <a href="#" class="flex items-center space-x-2">
+                            <img src="/static/images/profile.png" class="header_widgets_avatar mr-3" alt=""> 
+                            <span class="sm:inline hidden"> {{request.user.profile.user_type}} </span>
+                        </a>
+                        <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
+                            <ul>   
+                                <li>
+                                    <a href="#" class="user">
+                                        <div class="user_avatar">
+                                            <img src="/static/images/profile.png" alt="">
+                                        </div>
+                                        <div class="user_name">
+                                            <div>{{request.user.first_name}}&nbsp{{request.user.last_name}} </div>
+                                            <span> {{request.user.username}}</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li> 
+                                    <hr>
+                                </li>
+                                <li> 
+                                    <hr>
+                                </li>
+                                <li> 
+                                    <a href="#">
+                                        <ion-icon name="person-circle-outline" class="is-icon"></ion-icon>
+                                         My Account 
+                                    </a>
+                                </li>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <ion-icon name="settings-outline" class="is-icon"></ion-icon>
+                                        Account Settings  
+                                    </a>
+                                </li>
+                                <li> 
+                                    <hr>
+                                </li>
+                                <li> 
+                                    {% if user.is_authenticated %}
+                                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                                            {% csrf_token %}
+                                            <!-- You can add any additional fields or styling here -->
+                                        </form>
+
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <ion-icon name="log-out-outline" class="is-icon"></ion-icon>
+                                            Log Out
+                                        </a>
+                                    {% endif %}
+
+                                </li>
+                            </ul>
+                        </div> 
+
+                    </div>
+    
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+
+
+        {% block content %}
+
+        <!-- Main Contents -->
+        <div class="main_content">
+            
+ 
+                       
+           
+
+        </div>
+ 
+
+
+        {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="sidebar_inner" data-simplebar>
+                
+                <div class="-mb-1 border-b flex items-center pb-5 pt-4 px-2 space-x-4 cursor-pointer">
+                    <img src="/static/images/profile.png" alt="" class="h-12 rounded-full w-12">
+                    <div class="flex-1">
+                        <div class="font-semibold mb-0.5 text-base"> {{request.user.first_name}}&nbsp{{request.user.last_name}} </div>
+                        <div class="text-sm" style="word-wrap: break-word;">
+                            {{ request.user.profile.user_type }}
+                        </div>
+                        
+                    </div>
+                    <i class="icon-feather-chevron-down text-xl"></i>
+                </div>
+                <div uk-dropdown="offset:-10;mode: click" class="-ml-1 m-3 bg-white shadow-xl rounded-md p-4 border border-gray-100">
+                    <div class="w-60 font-medium">
+                        <a href="#" class="px-3 py-2 rounded block hover:bg-gray-100"> Account setting </a>
+                        {% if user.is_authenticated %}
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                            {% csrf_token %}
+                            <!-- You can add any additional fields or styling here -->
+                        </form>
+                    
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="px-3 py-2 rounded block hover:bg-gray-100">Sign out</a>
+                    {% endif %}
+                    
+                    </div>
+                </div>
+
+                <ul class="border-transparent px-3 py-2 rounded block hover:bg-blue-100" >
+                    <li><a href="/main/dashboard">
+                            <ion-icon name="home-outline" class="side-icon"></ion-icon>
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+                    <li><a href="my-courses.html">
+                            <ion-icon name="play-circle-outline" class="side-icon"></ion-icon>
+                            <span> My Courses</span>
+                        </a> 
+                    </li>
+                    <li><a href="profile.html">
+                            <ion-icon name="person-outline" class="side-icon"></ion-icon>
+                            <span> Profile</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="side_links px-3 py-2 rounded block hover:bg-blue-100" data-sub-title="">
+                    <li><a href="setting.html">
+                            <ion-icon name="person-outline" class="side-icon"></ion-icon>
+                            <span> Manage profile </span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                            {% csrf_token %}
+                            <!-- You can add any additional fields or styling here -->
+                        </form>
+
+                        <li>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <ion-icon name="log-out-outline" class="side-icon"></ion-icon>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+ 
+            </div>
+
+            <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
+        </div>
+        
+    </div>
+
+ 
+    <!-- Javascript
+    ================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'assets_1/js/uikit.js' %}"></script>
+    <script src="{% static 'assets_1/js/tippy.all.min.js' %}"></script>
+    <script src="{% static 'assets_1/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets_1/js/custom.js' %}"></script>
+    <script src="{% static 'assets_1/js/bootstrap-select.min.js' %}"></script>
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+ 
+</body>
+
+</html>
