@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '0h07n(^mkhld4tthgj%9fj626h$wm36mapajw_t6-!cu+)48l9'
-# SECRET_KEY = env('SECRET_KEY')
-SECRET_KEY ='0h07n(^mkhld4tthgj%9fj626h$wm36mapajw_t6-!cu+)48l9'
+SECRET_KEY = env('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,6 +86,7 @@ WSGI_APPLICATION = 'edulocus.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 IS_LOCAL = eval(os.environ.get('LOCAL', 'False'))
+IS_PRODUCTION = eval(os.environ.get('LOCAL', 'True'))
 
 # Determine database configuration based on environment
 if IS_LOCAL:
@@ -96,7 +97,7 @@ if IS_LOCAL:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+elif IS_PRODUCTION:
     # Server configuration
     DATABASES = {
         'default': {
@@ -106,6 +107,14 @@ else:
             'PASSWORD': 'A2aNs5w0tL9s8sb2aPse4wtL6ad',
             'HOST': 'localhost',
             'PORT': '5432',
+        }
+    }
+
+else:
+     DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
