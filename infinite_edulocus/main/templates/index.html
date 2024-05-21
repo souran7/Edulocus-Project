@@ -4,447 +4,845 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite EduLocus</title>
-    <link rel="shortcut icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
-    <!-- font family  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <!-- Font awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Bootstrap CSS -->
-    <!-- <link href="css/all.min.css" rel="stylesheet" /> -->
-    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="static/assets/css/owl.carousel.min.css" rel="stylesheet" />
-    <link href="static/assets/css/owl.theme.default.min.css" rel="stylesheet" />
-    <!-- <link href="css/style.css" rel="stylesheet" /> -->
-    <link href="static/assets/css/style-two.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite EduLocus</title>
+  <link rel="shortcut icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
+  <!-- font family  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap CSS -->
+  <!-- <link href="css/all.min.css" rel="stylesheet" /> -->
+  <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="static/assets/css/owl.carousel.min.css" rel="stylesheet" />
+  <link href="static/assets/css/owl.theme.default.min.css" rel="stylesheet" />
+  <!-- <link href="css/style.css" rel="stylesheet" /> -->
+  <link href="static/assets/css/style-two.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.css">
+
+  <style>
+    /* Google Fonts - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide-container {
+      max-width: 1120px;
+      width: 100%;
+      padding: 40px 0;
+    }
+
+    .slide-content {
+      margin: 0 40px;
+      overflow: hidden;
+      border-radius: 25px;
+    }
+
+    .cards {
+      border-radius: 25px;
+      background-color: #FFF;
+    }
+
+    .image-content,
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 14px;
+    }
+
+    .image-content {
+      position: relative;
+      row-gap: 5px;
+      padding: 25px 0;
+    }
+
+    .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #002643;
+      border-radius: 25px 25px 0 25px;
+    }
+
+    .overlay::before,
+    .overlay::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: -40px;
+      height: 40px;
+      width: 40px;
+      background-color: #002643;
+    }
+
+    .overlay::after {
+      border-radius: 0 25px 0 0;
+      background-color: #FFF;
+    }
+
+    .card-image {
+      position: relative;
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      background: #FFF;
+      padding: 3px;
+    }
+
+    .card-image .card-img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #002643;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #707070;
+      text-align: center;
+    }
+
+    .button {
+      border: none;
+      font-size: 16px;
+      color: #FFF;
+      padding: 8px 16px;
+      background-color: #002643;
+      border-radius: 6px;
+      margin: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background: #265DF2;
+    }
+
+    .swiper-navBtn {
+      color: #002643;
+      transition: color 0.3s ease;
+    }
+
+    .swiper-navBtn:hover {
+      color: #002643;
+    }
+
+    .swiper-navBtn::before,
+    .swiper-navBtn::after {
+      font-size: 38px;
+    }
+
+    .swiper-button-next {
+      right: 0;
+    }
+
+    .swiper-button-prev {
+      left: 0;
+    }
+
+    .swiper-pagination-bullet {
+      background-color: #002643;
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: #002643;
+    }
+
+    @media screen and (max-width: 768px) {
+      .slide-content {
+        margin: 0 10px;
+      }
+
+      .swiper-navBtn {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- header section start -->
-    <div class="top-header">
-        <div class="offer-box">
-            <marquee>
-                <div class="item">
-                    <a class="para-mute" href="#">
-                        Free Education for all
-                    </a>
-                </div>
-            </marquee>
+  <!-- header section start -->
+  <div class="top-header">
+    <div class="offer-box">
+      <marquee>
+        <div class="item">
+          <a class="para-mute" href="#">
+            Free Education for all
+          </a>
         </div>
+      </marquee>
     </div>
+  </div>
 
-    <!-- nanbar -->
-    <nav class="navbar navbar-expand-lg main-nav ">
-        <div class="container-fluid">
-            <a class="navbar-brand header-logo" href="/"><img src="static/assets/images/logo-light.png" alt=""></a>
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Home
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">page link</a></li>
-                            <li><a class="dropdown-item" href="#">page link</a></li>
-                            <li><a class="dropdown-item" href="#">page link</a></li>
-                            <li><a class="dropdown-item" href="#">page link</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav login-btn-box ">
-                    <li><a href="#" class="mobile-no">7003406065</a></li>
-                    <li><a href="{% url 'login' %}" class="login-btn">Log In</a></li>
-                    <li><a href="{% url 'sign-up' %}" class="login-btn sign-up">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-        </div>
-    </nav>
-    <!-- navbar -->
-    <!-- banner start -->
-    <!-- banner sec start -->
-    <section class="banner-sec">
-        <div class="container">
-            <div class="row g-lg-3 g-5">
-                <div class="col-md-6">
-                    <div class="banner-left">
-                        <h1 class="banner-title">Learn live from the best teachers</h1>
-                        <p class="para-mute">
-                            Attend interactive One-on-One classes from subject experts from top universities like IITs,
-                            BITS, IISc and NITs from your home.
-                            <br>
-                            Request your first lesson today!
-                        </p>
-                        <a href="#" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-
-                </div> <!--./col-md-6-->
-                <div class="col-md-6">
-                    <div class="banner-img">
-                        <img src="static/assets/images/banner-img.png" alt="">
-                       
-                    </div>
-                </div>
-            </div><!--./row-->
-        </div><!--./container-->
-    </section>
-    <!-- banner sec end -->
-    <!-- main-one -->
-    <section class="banner-sec main-one">
-        <div class="container">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="banner-left">
-                        <div class="title-wrapper">
-
-                            <h2 class="banner-title"> Learn from the best teachers from across the world sitting at home
-                                teacher student
-                            </h2>
-                            <img src="static/assets/images/sev-one.svg" alt="this is svg image for title">
-                        </div>
-                        <p class="para-mute">
-                            Infinite EduLocus's teachers are selected after a rigorous interview process - only the best,
-                            experienced teachers make the final cut. Our IB and IGCSE tutors are experts in the
-                            curricula and have extensive experience in training students from all over the world. We
-                            offer live One-to-One classes, tailor made to your requirements, ensuring that you get the
-                            teacher's undivided attention. From catching up on a topic to get an extra advantage over
-                            your peers, our classes will help you go the extra mile. Our state of the art online
-                            classrooms makes learning fun and engaging, and ensures that your learning experience is
-                            seamless.
-                        </p>
-                        <a href="#" class="main-btn">Check out the online classroom <i
-                                class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-
-                </div> <!--./col-md-6-->
-                <div class="col-md-6">
-                    <div class="banner-img">
-                        {% comment %} <img src="static/assets/images/main-one.png" alt=""> {% endcomment %}
-                        <img src="static/assets/images/physics.jpg" alt="">
-                    </div>
-                </div>
-            </div><!--./row-->
-        </div><!--./container-->
-    </section>
-    <!-- main one end -->
-    <!-- card section -->
-    <section class="card-sec">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="main-header">
-                        How do I attend lessons on Infinite EduLocus?
-                    </h2>
-                    <p class="para-mute">Learn how you can attend one-on-one or group classes, tailor made to your
-                        requirements.</p>
-                </div>
-            </div> <!--./row-->
-            <div class="row g-lg-5 g-3">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="num-box">
-                            <span>1</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Request a Lesson</h5>
-                            <p class="para-mute">Tell us what you need help with. We will connect you with an
-                                experienced teacher, and set up the first lesson.</p>
-                        </div>
-                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
-                    </div><!--./card-->
-                </div><!--./col-md-4-->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="num-box">
-                            <span>2</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Attend the First Class</h5>
-                            <p class="para-mute">Tell us what you need help with. We will connect you with an
-                                experienced teacher, and set up the first lesson.</p>
-                        </div>
-                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
-                    </div><!--./card-->
-                </div><!--./col-md-4-->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="num-box">
-                            <span>3</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Enjoy Learning!</h5>
-                            <p class="para-mute">Tell us what you need help with. We will connect you with an
-                                experienced teacher, and set up the first lesson.</p>
-                        </div>
-                        <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
-                    </div><!--./card-->
-                </div><!--./col-md-4-->
-            </div><!--./row-->
+  <!-- nanbar -->
+  <nav class="navbar navbar-expand-lg main-nav ">
+    <div class="container-fluid">
+      <a class="navbar-brand header-logo" href="/"><img src="static/assets/images/logo-light.png" alt=""></a>
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">page link</a></li>
+              <li><a class="dropdown-item" href="#">page link</a></li>
+              <li><a class="dropdown-item" href="#">page link</a></li>
+              <li><a class="dropdown-item" href="#">page link</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav login-btn-box ">
+          <li><a href="#" class="mobile-no">7003406065</a></li>
+          <li><a href="{% url 'login' %}" class="login-btn">Log In</a></li>
+          <li><a href="{% url 'sign-up' %}" class="login-btn sign-up">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <!-- navbar -->
+  <!-- banner start -->
+  <!-- banner sec start -->
+  <section class="banner-sec">
+    <div class="container">
+      <div class="row g-lg-3 g-5">
+        <div class="col-md-6">
+          <div class="banner-left">
+            <h1 class="banner-title">Learn live from the best teachers</h1>
+            <p class="para-mute">
+              Attend interactive One-on-One classes from subject experts from top universities like IITs,
+              BITS, IISc and NITs from your home.
+              <br>
+              Request your first lesson today!
+            </p>
             <a href="#" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
-        </div><!-- ./container-->
-    </section>
-    <!-- card sec end -->
-    <!-- TESTIMONIALS -->
-    <section class="testimonials">
+          </div>
+
+        </div> <!--./col-md-6-->
+        <div class="col-md-6">
+          <div class="banner-img">
+            <img src="static/assets/images/banner-img.png" alt="">
+
+          </div>
+        </div>
+      </div><!--./row-->
+    </div><!--./container-->
+  </section>
+  <!-- banner sec end -->
+  <!-- main-one -->
+  <section class="banner-sec main-one">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="banner-left">
+            <div class="title-wrapper">
+
+              <h2 class="banner-title"> Learn from the best teachers from across the world sitting at home
+                teacher student
+              </h2>
+              <img src="static/assets/images/sev-one.svg" alt="this is svg image for title">
+            </div>
+            <p class="para-mute">
+              Infinite EduLocus's teachers are selected after a rigorous interview process - only the best,
+              experienced teachers make the final cut. Our IB and IGCSE tutors are experts in the
+              curricula and have extensive experience in training students from all over the world. We
+              offer live One-to-One classes, tailor made to your requirements, ensuring that you get the
+              teacher's undivided attention. From catching up on a topic to get an extra advantage over
+              your peers, our classes will help you go the extra mile. Our state of the art online
+              classrooms makes learning fun and engaging, and ensures that your learning experience is
+              seamless.
+            </p>
+            <a href="#" class="main-btn">Check out the online classroom <i class="fa-solid fa-arrow-right-long"></i></a>
+          </div>
+
+        </div> <!--./col-md-6-->
+        <div class="col-md-6">
+          <div class="banner-img">
+            {% comment %} <img src="static/assets/images/main-one.png" alt=""> {% endcomment %}
+            <img src="static/assets/images/physics.jpg" alt="">
+          </div>
+        </div>
+      </div><!--./row-->
+    </div><!--./container-->
+  </section>
+  <!-- main one end -->
+  <!-- card section -->
+  <section class="card-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="main-header">
+            How do I attend lessons on Infinite EduLocus?
+          </h2>
+          <p class="para-mute">Learn how you can attend one-on-one or group classes, tailor made to your
+            requirements.</p>
+        </div>
+      </div> <!--./row-->
+      <div class="row g-lg-5 g-3">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="num-box">
+              <span>1</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Request a Lesson</h5>
+              <p class="para-mute">Tell us what you need help with. We will connect you with an
+                experienced teacher, and set up the first lesson.</p>
+            </div>
+            <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+          </div><!--./card-->
+        </div><!--./col-md-4-->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="num-box">
+              <span>2</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Attend the First Class</h5>
+              <p class="para-mute">Tell us what you need help with. We will connect you with an
+                experienced teacher, and set up the first lesson.</p>
+            </div>
+            <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+          </div><!--./card-->
+        </div><!--./col-md-4-->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="num-box">
+              <span>3</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Enjoy Learning!</h5>
+              <p class="para-mute">Tell us what you need help with. We will connect you with an
+                experienced teacher, and set up the first lesson.</p>
+            </div>
+            <div class="arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+          </div><!--./card-->
+        </div><!--./col-md-4-->
+      </div><!--./row-->
+      <a href="#" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
+    </div><!-- ./container-->
+  </section>
+  <!-- card sec end -->
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="main-header">
+            Meet our Teachers
+          </h2>
+          <p class="para-mute">Expert teachers from top universities will guide you in all your academic needs
+          </p>
+        </div>
+      </div> <!--./row-->
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div id="customers-testimonials" class="owl-carousel">
+
+            <!--TESTIMONIAL 1 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
+                <h3 class="t-name">Geetha</h3>
+                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                <p class="subject">Chemistry Wizard</p>
+              </div>
+            </div>
+            <!--END OF TESTIMONIAL 1 -->
+            <!--TESTIMONIAL 2 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
+                <h3 class="t-name">Geetha</h3>
+                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                <p class="subject">Chemistry Wizard</p>
+              </div>
+            </div>
+            <!--END OF TESTIMONIAL 2 -->
+            <!--TESTIMONIAL 3 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="static/assets/images/t-three.jpg" alt="">
+                <h3 class="t-name">Geetha</h3>
+                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                <p class="subject">Chemistry Wizard</p>
+              </div>
+            </div>
+            <!--END OF TESTIMONIAL 3 -->
+            <!--TESTIMONIAL 4 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
+                <h3 class="t-name">Geetha</h3>
+                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                <p class="subject">Chemistry Wizard</p>
+              </div>
+            </div>
+            <!--END OF TESTIMONIAL 4 -->
+            <!--TESTIMONIAL 5 -->
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
+                <h3 class="t-name">Geetha</h3>
+                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
+                <p class="subject">Chemistry Wizard</p>
+              </div>
+            </div>
+            <!--END OF TESTIMONIAL 5 -->
+          </div>
+        </div>
+
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="main-header">
-                        Meet our Teachers
+
+          <div class="col-lg-12">
+            <h2 class="main-header">
+              Testimonials
+            </h2>
+            <p class="para-mute">Testimonials from our students and parents
+            </p>
+          </div>
+
+          <div class="slide-container swiper">
+            <div class="slide-content">
+              <div class="card-wrapper swiper-wrapper">
+                <div class="cards swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
                     </h2>
-                    <p class="para-mute">Expert teachers from top universities will guide you in all your academic needs
-                    </p>
-                </div>
-            </div> <!--./row-->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="customers-testimonials" class="owl-carousel">
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
 
-                        <!--TESTIMONIAL 1 -->
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
-                                <h3 class="t-name">Geetha</h3>
-                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
-                                <p class="subject">Chemistry Wizard</p>
-                            </div>
-                        </div>
-                        <!--END OF TESTIMONIAL 1 -->
-                        <!--TESTIMONIAL 2 -->
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
-                                <h3 class="t-name">Geetha</h3>
-                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
-                                <p class="subject">Chemistry Wizard</p>
-                            </div>
-                        </div>
-                        <!--END OF TESTIMONIAL 2 -->
-                        <!--TESTIMONIAL 3 -->
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <img class="img-circle" src="static/assets/images/t-three.jpg" alt="">
-                                <h3 class="t-name">Geetha</h3>
-                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
-                                <p class="subject">Chemistry Wizard</p>
-                            </div>
-                        </div>
-                        <!--END OF TESTIMONIAL 3 -->
-                        <!--TESTIMONIAL 4 -->
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <img class="img-circle" src="static/assets/images/t-one.jpg" alt="">
-                                <h3 class="t-name">Geetha</h3>
-                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
-                                <p class="subject">Chemistry Wizard</p>
-                            </div>
-                        </div>
-                        <!--END OF TESTIMONIAL 4 -->
-                        <!--TESTIMONIAL 5 -->
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <img class="img-circle" src="static/assets/images/t-two.jpg" alt="">
-                                <h3 class="t-name">Geetha</h3>
-                                <h4 class="qalification">BS, IISC & MS, UPJV France</h4>
-                                <p class="subject">Chemistry Wizard</p>
-                            </div>
-                        </div>
-                        <!--END OF TESTIMONIAL 5 -->
-                    </div>
+                    <button class="button">View More</button>
+                  </div>
                 </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png"
+                        alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">Rahul Dutta
+                    </h2>
+                    <p class="description">The lorem text the section that contains header with having open
+                      functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
+
+                    <button class="button">View More</button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div class="swiper-button-next swiper-navBtn"></div>
+            <div class="swiper-button-prev swiper-navBtn"></div>
+            <div class="swiper-pagination"></div>
+          </div>
         </div>
-    </section>
-    
-    <!-- footer start -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="footer-left-logo">
-                        <figure>
-                            <a href="#" class="footer-logo"><img src="static/assets/images/icon-logo.png" class="img-fluid"
-                                    alt=""></a>
-                        </figure>
-                        <h5 class="para-mute">
-                            Infinite EduLocus is an online tutoring platform with qualified teachers from top universities across
-                            the
-                            globe. We provide live One-on-One classes, which take place on our online classroom, which
-                            has
-                            an online video chat and a shared whiteboard. The teacher and the student can interact with
-                            each
-                            other through the video chat and write on the shared whiteboard
-                            <br>
-                            Infinite EduLocus gives you access to the best teachers in the world, without any constraints on
-                            geography. Once you request a lesson, we will match you to a highly qualified personal
-                            tutor,
-                            who will take the first lesson. Once you are satisfied with the first lesson, your dedicated
-                            academic counsellor will chart a detailed academic plan, tailormade for you.
-
-                        </h5>
-                    </div>
 
 
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <h4 class="footer-link-header">QUICK LINKS</h4>
-                    <ul>
-                        <li><a href="#" class="para-mute">Home</a></li>
-                        <li><a href="#" class="para-mute">Contact</a></li>
-                        <li><a href="#" class="para-mute">About Us</a></li>
-                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
-                        <li><a href="#" class="para-mute">Privacy</a></li>
-                        <li><a href="#" class="para-mute">Contact</a></li>
-                        <li><a href="#" class="para-mute">About Us</a></li>
-                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
-                        <li><a href="#" class="para-mute">Privacy</a></li>
 
 
-                    </ul>
-                </div>
+      </div>
+    </div>
+  </section>
 
-                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                    <h4 class="footer-link-header">QUICK LINKS</h4>
+  <!-- footer start -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="footer-left-logo">
+            <figure>
+              <a href="#" class="footer-logo"><img src="static/assets/images/icon-logo.png" class="img-fluid"
+                  alt=""></a>
+            </figure>
+            <h5 class="para-mute">
+              Infinite EduLocus is an online tutoring platform with qualified teachers from top universities across
+              the
+              globe. We provide live One-on-One classes, which take place on our online classroom, which
+              has
+              an online video chat and a shared whiteboard. The teacher and the student can interact with
+              each
+              other through the video chat and write on the shared whiteboard
+              <br>
+              Infinite EduLocus gives you access to the best teachers in the world, without any constraints on
+              geography. Once you request a lesson, we will match you to a highly qualified personal
+              tutor,
+              who will take the first lesson. Once you are satisfied with the first lesson, your dedicated
+              academic counsellor will chart a detailed academic plan, tailormade for you.
 
-                    <ul>
-                        <li><a href="#" class="para-mute">Terms &amp; Conditions</a></li>
-                        <li><a href="#" class="para-mute">Cookie Policy</a></li>
-                        <li><a href="#" class="para-mute">Contact</a></li>
-                        <li><a href="#" class="para-mute">About Us</a></li>
-                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
-                        <li><a href="#" class="para-mute">Privacy</a></li>
-                        <li><a href="#" class="para-mute">IB Tutoring</a></li>
-                        <li><a href="#" class="para-mute">Privacy</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-4">
-                    <h4 class="footer-link-header">GET IN touch</h4>
+            </h5>
+          </div>
 
-                    <ul>
-                        <li><a href="#" class="para-mute"> <i class="fa-solid fa-phone"></i>+91-700340-6065</a></li>
-                        <li><a href="#" class="para-mute"> <i class="fa-regular fa-envelope"></i>Infiniteedulocus@gmail.com</a>
-                        </li>
-                        <li class="para-mute">address Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Obcaecati, itaque. Fugiat, excepturi?</li>
-                    </ul>
-                    <ul class="social-media">
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                    </ul>
-                    <div class="app-link">
-                        <a href="#" class="apple">
-                            <img src="static/assets/images/apple.svg" alt="">
-                        </a>
-                        <a href="#" class="android">
-                            <img src="static/assets/images/and.svg" alt="">
-                        </a>
-                    </div>
-                </div>
+
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <h4 class="footer-link-header">QUICK LINKS</h4>
+          <ul>
+            <li><a href="#" class="para-mute">Home</a></li>
+            <li><a href="#" class="para-mute">Contact</a></li>
+            <li><a href="#" class="para-mute">About Us</a></li>
+            <li><a href="#" class="para-mute">IB Tutoring</a></li>
+            <li><a href="#" class="para-mute">Privacy</a></li>
+            <li><a href="#" class="para-mute">Contact</a></li>
+            <li><a href="#" class="para-mute">About Us</a></li>
+            <li><a href="#" class="para-mute">IB Tutoring</a></li>
+            <li><a href="#" class="para-mute">Privacy</a></li>
+
+
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <h4 class="footer-link-header">QUICK LINKS</h4>
+
+          <ul>
+            <li><a href="#" class="para-mute">Terms &amp; Conditions</a></li>
+            <li><a href="#" class="para-mute">Cookie Policy</a></li>
+            <li><a href="#" class="para-mute">Contact</a></li>
+            <li><a href="#" class="para-mute">About Us</a></li>
+            <li><a href="#" class="para-mute">IB Tutoring</a></li>
+            <li><a href="#" class="para-mute">Privacy</a></li>
+            <li><a href="#" class="para-mute">IB Tutoring</a></li>
+            <li><a href="#" class="para-mute">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-4">
+          <h4 class="footer-link-header">GET IN touch</h4>
+
+          <ul>
+            <li><a href="#" class="para-mute"> <i class="fa-solid fa-phone"></i>+91-700340-6065</a></li>
+            <li><a href="#" class="para-mute"> <i class="fa-regular fa-envelope"></i>Infiniteedulocus@gmail.com</a>
+            </li>
+            <li class="para-mute">address Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Obcaecati, itaque. Fugiat, excepturi?</li>
+          </ul>
+          <ul class="social-media">
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+          </ul>
+          <div class="app-link">
+            <a href="#" class="apple">
+              <img src="static/assets/images/apple.svg" alt="">
+            </a>
+            <a href="#" class="android">
+              <img src="static/assets/images/and.svg" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr class="footer-hr">
+    </div>
+    <div class="copy-right">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer-box">
+
+              <div class="footer-left">
+
+                <small class="content"><a class="para-mute" href="#">Terms &amp; Conditions
+                    |</a></small>
+
+                <small class="content"><a class="para-mute" href="#">Privacy Policy |</a></small>
+
+                <small class="content">© 2024, <a class="para-mute" href="#" title="">Infinite EduLocus </a></small>
+
+              </div>
+              <div class="footer-right">
+                <p class="para-mute">If you need any help or support, please contact us at
+                  Infiniteedulocus@gmail.com.</p>
+              </div>
             </div>
-            <hr class="footer-hr">
+
+          </div>
         </div>
-        <div class="copy-right">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="footer-box">
+      </div>
+    </div>
+  </footer>
+  <!-- footer end -->
+  <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script>
 
-                            <div class="footer-left">
+  <!-- JavaScript -->
+  <!--Uncomment this line-->
+  <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script>
+  <!-- script -->
+  <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/js/jquery.min.js"></script>
+  <script src="static/assets/js/owl.carousel.min.js"></script>
 
-                                <small class="content"><a class="para-mute" href="#">Terms &amp; Conditions
-                                        |</a></small>
+  <!-- <script src="js/custom.js"></script> -->
+  <script src="static/assets/js/custom-two.js"></script>
 
-                                <small class="content"><a class="para-mute" href="#">Privacy Policy |</a></small>
+  <script>
+    jQuery(document).ready(function ($) {
+      "use strict";
+      //  TESTIMONIALS CAROUSEL HOOK
+      $('#customers-testimonials').owlCarousel({
+        loop: true,
+        center: true,
+        items: 3,
+        margin: 0,
+        autoplay: true,
+        dots: true,
+        autoplayTimeout: 8500,
+        smartSpeed: 450,
+        responsive: {
+          0: {
+            items: 1
+          },
+          768: {
+            items: 2
+          },
+          1170: {
+            items: 3
+          }
+        }
+      });
+    });
+  </script>
+  <script>
 
-                                <small class="content">© 2024, <a class="para-mute" href="#" title="">Infinite EduLocus </a></small>
+    var swiper = new Swiper(".slide-content", {
+      slidesPerView: 3,
+      spaceBetween: 25,
+      loop: true,
+      centerSlide: 'true',
+      fade: 'true',
+      grabCursor: 'true',
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
 
-                            </div>
-                            <div class="footer-right">
-                                <p class="para-mute">If you need any help or support, please contact us at
-                                  Infiniteedulocus@gmail.com.</p>
-                            </div>
-                        </div>
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        520: {
+          slidesPerView: 2,
+        },
+        950: {
+          slidesPerView: 3,
+        },
+      },
+    });
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer end -->
-
-    <!-- script -->
-    <script src="static/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="static/assets/js/jquery.min.js"></script>
-    <script src="static/assets/js/owl.carousel.min.js"></script>
-
-    <!-- <script src="js/custom.js"></script> -->
-    <script src="static/assets/js/custom-two.js"></script>
-
-    <script>
-        jQuery(document).ready(function ($) {
-            "use strict";
-            //  TESTIMONIALS CAROUSEL HOOK
-            $('#customers-testimonials').owlCarousel({
-                loop: true,
-                center: true,
-                items: 3,
-                margin: 0,
-                autoplay: true,
-                dots: true,
-                autoplayTimeout: 8500,
-                smartSpeed: 450,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    768: {
-                        items: 2
-                    },
-                    1170: {
-                        items: 3
-                    }
-                }
-            });
-        });
-    </script>
+  </script>
 </body>
 
 </html>
