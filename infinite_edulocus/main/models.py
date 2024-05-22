@@ -31,7 +31,10 @@ class Profile(models.Model):
 class Student(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
     grade = models.IntegerField(choices=[(i, i) for i in range(6, 13)])
-    subjects = models.ManyToManyField('Subject', through='StudentSubject')
+    subjects = models.ManyToManyField('Subject',  null=True, blank=True)
+
+    def __str__(self):
+        return self.profile.user.username + "'s Student Profile"
 
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
@@ -52,12 +55,7 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
-class StudentSubject(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
-    class Meta:
-        unique_together = ['student', 'subject']
 
 
 

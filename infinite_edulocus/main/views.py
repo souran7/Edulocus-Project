@@ -174,7 +174,6 @@ def sign_up(request):
 
     return render(request, 'sign_up.html', {'error': error_message})
 
-
 @login_required(login_url=LOGIN_URL)
 def dashboard(request):
     # Get the logged-in user's profile
@@ -183,6 +182,21 @@ def dashboard(request):
     # Query all grades
     grades = Grade.objects.all().values_list('grade', flat=True).distinct()
 
+    # Initialize variables to store grade and subjects for students
+    student_grade = None
+    student_subjects = None
+
+    # Check if the user is a student
+    if user_profile.user_type == 'Student':
+        # Get the student instance
+        student_instance = Student.objects.get(profile=user_profile)
+        
+        # Retrieve the grade chosen by the student
+        student_grade = student_instance.grade
+        
+        # Retrieve the subjects chosen by the student
+        student_subjects = student_instance.subjects.all()
+
     # Check if the user is a superuser
     if request.user.is_superuser:
         show_modal = False  # Ignore show_modal for superusers
@@ -190,8 +204,8 @@ def dashboard(request):
         # Check if the user's basic details are false
         show_modal = not user_profile.basic_details
 
-    # Pass the show_modal flag, user_profile, and grades to the template
-    return render(request, 'dashboard.html', {'show_modal': show_modal, 'user_profile': user_profile, 'grades': grades})
+    # Pass the show_modal flag, user_profile, grades, student_grade, and student_subjects to the template
+    return render(request, 'dashboard.html', {'show_modal': show_modal, 'user_profile': user_profile, 'grades': grades, 'student_grade': student_grade, 'student_subjects': student_subjects})
 
 def get_subjects_for_grade(request, grade):
     # Query the Grade object for the specified grade
@@ -208,7 +222,6 @@ def get_subjects_for_grade(request, grade):
 
     # Return JSON response with subjects data
     return JsonResponse(subjects_data, safe=False)
-
 @csrf_exempt
 def update_profile(request):
     if request.method == 'POST':
@@ -220,7 +233,6 @@ def update_profile(request):
         experience = data.get('experience')
         grades = data.get('grades')  # Assuming this is sent from the frontend
         subjects = data.get('subjects')  # Assuming this is sent from the frontend
-        print(experience)
 
         # Get the user's profile
         user_profile = request.user.profile
@@ -232,24 +244,14 @@ def update_profile(request):
         user_profile.save()
 
         # Check if user is a student
-        if user_profile.user_type == 'student':
+        if user_profile.user_type == 'Student':
             # Create Student object
-            with transaction.atomic():
-                student_instance, created = Student.objects.get_or_create(profile=user_profile)
-                if created:  # If the student instance was just created
-                    student_instance.grade = grades
-                    student_instance.save()
-                else:  # If the student instance already exists
-                    student_instance.grade = grades
-                    student_instance.save()
+            student_instance = Student.objects.create(profile=user_profile, grade=grades)
 
-                # Clear existing subjects for the student
-                student_instance.subjects.clear()
-
-                # Add selected subjects to the student
-                for subject_id in subjects:
-                    subject = Subject.objects.get(id=subject_id)
-                    student_instance.subjects.add(subject)
+            # Add selected subjects to the student
+            if subjects:
+                subjects_instances = Subject.objects.filter(id__in=subjects)
+                student_instance.subjects.add(*subjects_instances)  # Add subjects to the M2M relation
 
         # Check if user is a teacher
         elif user_profile.user_type == 'Teacher':
@@ -260,7 +262,6 @@ def update_profile(request):
 
     # Return error response if request method is not POST
     return JsonResponse({'error': 'Invalid request method'}, status=405)
-
 
 
 
