@@ -149,14 +149,39 @@
         .card button:hover {
             background-color: #003366;
         }
+        /* Base styles */
+.main_content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-top: auto; 
+}
+
+.content-wrapper {
+    flex: 1;
+    padding: 20px; /* Adjust padding as needed */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
     </style>
 </head>
 
-<div class="main_content" style="height:100vh;">
+<div class="main_content" >
     <div class="content-wrapper">
-        <div>
-            
-        </div>
+        
     </div>      
     {% include 'footer.html' %}
 
