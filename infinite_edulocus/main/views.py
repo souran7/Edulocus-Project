@@ -360,3 +360,35 @@ def landing_page(request):
 
 def base(request):
     return render(request, 'base.html')
+
+
+
+
+@login_required
+def get_user_subjects_view(request):
+    user_id = request.user.id
+    
+    try:
+        # Get the user profile
+        profile = Profile.objects.get(user__id=user_id)
+        
+        # Get the student associated with the profile
+        student = Student.objects.get(profile=profile)
+        
+        # Get the subjects chosen by the student
+        subjects = student.subjects.all()
+        
+        # Prepare the list of subjects with names and image URLs
+        subjects_info = []
+        for subject in subjects:
+            subjects_info.append({
+                'name': subject.name,
+                'image_url': subject.image.url if subject.image else None
+            })
+        
+        return JsonResponse(subjects_info, safe=False)
+    
+    except Profile.DoesNotExist:
+        return JsonResponse({"error": "Profile does not exist for the given user_id."}, status=404)
+    except Student.DoesNotExist:
+        return JsonResponse({"error": "Student profile does not exist for the given user_id."}, status=404)

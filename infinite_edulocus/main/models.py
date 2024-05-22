@@ -23,6 +23,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     basic_details = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -35,6 +36,17 @@ class Student(models.Model):
 
     def __str__(self):
         return self.profile.user.username + "'s Student Profile"
+    
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='subject_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
@@ -49,11 +61,7 @@ class Grade(models.Model):
         subjects_list = ', '.join(str(subject) for subject in self.subjects.all())
         return f"Grade {self.grade} - Subjects: {subjects_list}"
 
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
 
 
 

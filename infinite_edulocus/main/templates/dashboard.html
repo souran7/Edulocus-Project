@@ -113,14 +113,49 @@
             border-top-left-radius: calc(.3rem - 1px);
             border-top-right-radius: calc(.3rem - 1px);
         }
+
+        .content-wrapper {
+            background-color: #002643;
+            height: 90vh;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            justify-content: space-between;;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            padding: 16px;
+            width: 200px;
+            text-align: center;
+            height:295px;
+        }
+        .card img {
+            max-width: 100%;
+            height: 160px;
+            border-radius: 4px;
+        }
+        .card button {
+            background-color: #004080;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .card button:hover {
+            background-color: #003366;
+        }
     </style>
 </head>
 
 <div class="main_content" style="height:100vh;">
-    <div class="content-wrapper" style="background-color:#002643; height:90vh;">
+    <div class="content-wrapper">
         <div>
-            <h1 style="color:white;">subjects:{{ student_subjects }}</h1>
-            <h1 style="color:white;">grades:{{ student_grade }}</h1>
+            
         </div>
     </div>      
     {% include 'footer.html' %}
@@ -315,6 +350,67 @@ window.onkeydown = function(event) {
         </script>
 
     
+        <script>
+            // Get the user type from the context
+            const userType = '{{ request.user.profile.user_type }}';
+        
+            // Function to create and display subject cards
+            function displaySubjects(subjects) {
+                const contentWrapper = document.querySelector('.content-wrapper');
+        
+                subjects.forEach(subject => {
+                    // Create card element
+                    const card = document.createElement('div');
+                    card.className = 'card';
+        
+                    // Add subject image
+                    const img = document.createElement('img');
+                    img.src = subject.image_url || 'default_image_url'; // Use a default image if no URL
+                    img.alt = subject.name;
+                    card.appendChild(img);
+        
+                    // Add subject name
+                    const name = document.createElement('p');
+                    name.textContent = subject.name;
+                    card.appendChild(name);
+        
+                    // Add request demo button
+                   // Add request demo button with right arrow icon
+                    const button = document.createElement('button');
+                    button.textContent = 'Request Demo';
+                    const arrowIcon = document.createElement('span');
+                    arrowIcon.innerHTML = '&#9658;'; // Unicode for right arrow
+                    button.appendChild(arrowIcon);
+                    button.addEventListener('click', () => {
+                        // Your button click handler logic here
+                    });
+                    card.appendChild(button);
 
+        
+                    // Append card to content wrapper
+                    contentWrapper.appendChild(card);
+                });
+            }
+        
+            // Function to fetch subjects from the server
+            async function fetchSubjects() {
+                try {
+                    const response = await fetch('/main/user/subjects/');
+                    if (response.ok) {
+                        const data = await response.json();
+                        displaySubjects(data);
+                    } else {
+                        console.error('Error fetching subjects:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching subjects:', error);
+                }
+            }
+        
+            // Check if user type is student and fetch subjects
+            if (userType === 'Student') {
+                fetchSubjects();
+            }
+        </script>
     
 {% endblock content %}

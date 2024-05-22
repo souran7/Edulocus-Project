@@ -40,7 +40,7 @@
     
                     <!-- Logo -->
                     <div id="logo" style="background-color:#002643; height:100%; width:100%; margin-right:0;">
-                        <a href="dashboard.html">
+                        <a href="/">
                             {% comment %} <h1 style="color:white;width:300px;height: 50px;text-align: center;margin-top: 18px;">Infinite EduLocus</h1> {% endcomment %}
                             <img  src="/static/images/EdulocusLt.png" style="    height: 60px;
                             margin-left: 5px;
@@ -205,11 +205,15 @@
                             <span> Dashboard </span>
                         </a>
                     </li>
-                    <li><a href="my-courses.html">
+                    {% if request.user.profile.user_type == 'Student' %}
+                    <li>
+                        <a href="my-courses.html">
                             <ion-icon name="play-circle-outline" class="side-icon"></ion-icon>
                             <span> My Courses</span>
-                        </a> 
+                        </a>
                     </li>
+                {% endif %}
+                
                     <li><a href="profile.html">
                             <ion-icon name="person-outline" class="side-icon"></ion-icon>
                             <span> Profile</span>

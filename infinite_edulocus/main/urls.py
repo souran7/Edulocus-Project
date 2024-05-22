@@ -14,7 +14,8 @@ urlpatterns = [
     path('api/grades/<int:grade>/subjects/', get_subjects_for_grade, name='get_subjects_for_grade'),
     path('password-reset/', password_reset_request, name='password_reset_request'),
     path('reset-password/<uidb64>/<token>/', reset_password, name='reset_password'),
-    path('base', base, name="base")
+    path('base', base, name="base"),
+    path('user/subjects/', get_user_subjects_view, name='user-subjects')
+]
     
     # Other URL patterns...
-]

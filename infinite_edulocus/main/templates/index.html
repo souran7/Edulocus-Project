@@ -390,11 +390,17 @@
             </ul>
           </li>
         </ul>
-        <ul class="navbar-nav login-btn-box ">
+        <ul class="navbar-nav login-btn-box">
           <li><a href="#" class="mobile-no">7003406065</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="/main/dashboard/" class="login-btn">Dashboard</a></li>
+          {% else %}
+             
+          
           <li><a href="{% url 'login' %}" class="login-btn">Log In</a></li>
           <li><a href="{% url 'sign-up' %}" class="login-btn sign-up">Sign Up</a></li>
-        </ul>
+          {% endif %}
+      </ul>
       </div>
     </div>
     </div>
