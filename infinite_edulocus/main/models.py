@@ -28,13 +28,13 @@ class Profile(models.Model):
         return f"{self.first_name} {self.last_name}"
     
 
-# class Student(models.Model):
-#     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
-#     grade = models.IntegerField(choices=[(i, i) for i in range(6, 13)])
-#     # subjects = models.ManyToManyField('Subject',  null=True, blank=True)
+class Student(models.Model):
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
+    grade = models.IntegerField(choices=[(i, i) for i in range(6, 13)])
+    # subjects = models.ManyToManyField('Subject',  null=True, blank=True)
 
-#     def __str__(self):
-#         return self.profile.user.username + "'s Student Profile"
+    def __str__(self):
+        return self.profile.user.username + "'s Student Profile"
 
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, primary_key=True)
