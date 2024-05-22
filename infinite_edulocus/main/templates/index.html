@@ -357,20 +357,20 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link" href="/"
               aria-expanded="false">
               Home
             </a>
-            <ul class="dropdown-menu">
+            {% comment %} <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">page link</a></li>
               <li><a class="dropdown-item" href="#">page link</a></li>
               <li><a class="dropdown-item" href="#">page link</a></li>
               <li><a class="dropdown-item" href="#">page link</a></li>
-            </ul>
+            </ul> {% endcomment %}
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link " href="#">About</a>
           </li>
           <li class="nav-item">
@@ -378,10 +378,10 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
-          </li>
+          </li> {% endcomment %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
+              Courses
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>
@@ -391,7 +391,7 @@
           </li>
         </ul>
         <ul class="navbar-nav login-btn-box">
-          <li><a href="#" class="mobile-no">7003406065</a></li>
+          <li><a href="#" class="mobile-no">+91-70034 06065</a></li>
           {% if user.is_authenticated %}
           <li><a href="/main/dashboard/" class="login-btn">Dashboard</a></li>
           {% else %}
