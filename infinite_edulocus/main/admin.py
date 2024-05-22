@@ -6,5 +6,7 @@ admin.site.register(Teacher)
 admin.site.register(Student)
 admin.site.register(Grade)
 admin.site.register(Subject)
+admin.site.register(Email_Body)
+admin.site.register(EmailLog)
 
 

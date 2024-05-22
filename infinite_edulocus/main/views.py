@@ -34,6 +34,7 @@ from .forms import NewPasswordForm
 from django.http import JsonResponse
 import json
 from django.db import transaction
+from .mailers import send_welcome_email
 
 
 
@@ -162,6 +163,8 @@ def sign_up(request):
 
             # Log in the user after successful registration
             login(request, user)
+            # Send welcome email
+            send_welcome_email(email)
             return HttpResponseRedirect(reverse('dashboard'))  # Redirect to dashboard after successful registration
 
         except ValidationError as e:
@@ -187,15 +190,7 @@ def dashboard(request):
     student_subjects = None
 
     # Check if the user is a student
-    if user_profile.user_type == 'Student':
-        # Get the student instance
-        student_instance = Student.objects.get(profile=user_profile)
-        
-        # Retrieve the grade chosen by the student
-        student_grade = student_instance.grade
-        
-        # Retrieve the subjects chosen by the student
-        student_subjects = student_instance.subjects.all()
+    
 
     # Check if the user is a superuser
     if request.user.is_superuser:
@@ -203,6 +198,16 @@ def dashboard(request):
     else:
         # Check if the user's basic details are false
         show_modal = not user_profile.basic_details
+
+    # if user_profile.user_type == 'Student':
+    #     # Get the student instance
+    #     student_instance = Student.objects.get(profile=user_profile)
+        
+    #     # Retrieve the grade chosen by the student
+    #     student_grade = student_instance.grade
+        
+    #     # Retrieve the subjects chosen by the student
+    #     student_subjects = student_instance.subjects.all()    
 
     # Pass the show_modal flag, user_profile, grades, student_grade, and student_subjects to the template
     return render(request, 'dashboard.html', {'show_modal': show_modal, 'user_profile': user_profile, 'grades': grades, 'student_grade': student_grade, 'student_subjects': student_subjects})

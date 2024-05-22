@@ -60,6 +60,33 @@ class Subject(models.Model):
 
 
 
-class Email_Send(models.Model):
-    subject = models.TextField(blank=True, null=True)
-    body = models.TextField(blank=True, null=True)
+class Email_Body(models.Model):
+    EMAIL_TYPES = (
+        ('RESET_PASSWORD', 'RESET_PASSWORD'),
+        ('FORGOT_PASSWORD', 'FORGOT_PASSWORD'),
+        ('WELCOME_MAIL', 'WELCOME_MAIL'),
+    
+    )
+    email_type = models.CharField(max_length=50, choices=EMAIL_TYPES)
+    body =models.TextField(blank=True, null=True)
+    subject =models.TextField(blank=True, null=True)
+    def __str__(self):
+        return f"{self.email_type}"
+    
+
+
+
+class EmailLog(models.Model):
+    EMAIL_STATUS = (
+        ('SUCCESS', 'Success'),
+        ('ERROR', 'Error'),
+    )
+    
+    email_type = models.CharField(max_length=50, choices=Email_Body.EMAIL_TYPES)
+    status = models.CharField(max_length=10, choices=EMAIL_STATUS)
+    reason = models.TextField(blank=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
+    user_email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.email_type} - {self.status} - {self.datetime}"
