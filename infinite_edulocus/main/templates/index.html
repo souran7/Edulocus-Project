@@ -328,9 +328,9 @@
   background-color: #f3f5fa;
 }
 .whatsapp-position{
-  right: 24px;
+    right: 24px;
     width: 60px;
-    bottom: 100px;
+    bottom: 162px;
     height: 60px;
     z-index: 10000;
     position: fixed;
@@ -343,6 +343,16 @@
   height: 60px;
   z-index: 10000;
   position: fixed;
+}
+
+.facebook-position{
+  right: 24px;
+  width: 53px;
+  bottom: 92px;
+  height: 60px;
+  z-index: 10000;
+  position: fixed;
+
 }
 
   </style>
@@ -976,10 +986,15 @@
               adipisicing elit. Obcaecati, itaque. Fugiat, excepturi?</li>
           </ul>
           <ul class="social-media">
-            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li>
+              <a href="https://www.facebook.com/infiniteedulocus?mibextid=ZbWKwL" target="_blank">
+                  <i class="fa-brands fa-facebook-f"></i>
+              </a>
+          </li>
+          
             {% comment %} <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li> {% endcomment %}
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="https://www.instagram.com/infiniteedulocus?utm_source=qr&igsh=N29pY2V4bm1sand6"><i class="fa-brands fa-instagram"></i></a></li>
+            {% comment %} <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li> {% endcomment %}
           </ul>
           <div class="app-link">
             <a href="#" class="apple">
@@ -1028,6 +1043,9 @@
 </a>
 
   
+<a class="facebook-position" href="https://www.facebook.com/infiniteedulocus?mibextid=ZbWKwL" target="_blank">
+  <img src="static/assets/images/facebook.png" alt="Facebook">
+</a>
   
   </footer>
   <!-- footer end -->
