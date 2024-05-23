@@ -327,6 +327,15 @@
   padding: 60px 0;
   background-color: #f3f5fa;
 }
+.whatsapp-position{
+  right: 24px;
+    width: 60px;
+    bottom: 100px;
+    height: 60px;
+    z-index: 10000;
+    position: fixed;
+    
+}
 
   </style>
 </head>
@@ -963,7 +972,7 @@
           </ul>
           <ul class="social-media">
             <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+            {% comment %} <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li> {% endcomment %}
             <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
           </ul>
@@ -996,8 +1005,8 @@
 
               </div>
               <div class="footer-right">
-                <p class="para-mute">If you need any help or support, please contact us at
-                  Infiniteedulocus@gmail.com.</p>
+                <p class="para-mute" style="margin-bottom:0; text-transform: none;">If you need any help or support, please contact us at Infiniteedulocus@gmail.com.</p>
+
               </div>
             </div>
 
@@ -1005,6 +1014,10 @@
         </div>
       </div>
     </div>
+    <a class="whatsapp-position" href="#">
+      <img src="static/assets/images/whatsapp.gif" alt="WhatsApp">
+  </a>
+  
   </footer>
   <!-- footer end -->
   <script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script>
