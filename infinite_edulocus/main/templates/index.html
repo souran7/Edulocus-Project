@@ -363,6 +363,23 @@
   z-index: 10000;
   position: fixed;
 }
+container#counter-stats {
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.stats {
+  text-align: center;
+  font-size: 35px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.stats .fa {
+  color: #fff;
+  font-size: 60px;
+}
 
   </style>
 </head>
@@ -461,6 +478,28 @@
               Request your first lesson today!
             </p>
             <a href="{% url 'sign-up' %}" class="banner-btn">REQUEST A LESSON <i class="fa-solid fa-arrow-right-long"></i></a>
+          </div>
+          <div class="container" id="counter-stats" style="margin-top:60px;">
+            <div class="row">
+        
+              <div class="col-lg-3 stats">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="counting" style="color: white;" data-count="50">0</div>
+                <h5 style="color: white;">TEACHERS</h5>
+              </div>
+        
+             
+        
+              <div class="col-lg-3 stats">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                <div class="counting" style="color: white;" data-count="500">0</div>
+                <h5 style="color: white;">STUDENTS</h5>
+              </div>
+        
+             
+        
+            </div>
+            <!-- end row -->
           </div>
 
         </div> <!--./col-md-6-->
@@ -736,7 +775,8 @@
                   <div class="card-content">
                     <h2 class="name">Divij Raj
                     </h2>
-                    <p class="description">Thanks to the expert guidance and interactive learning modules provided by this platform, I was able to excel in my JEE Main exams. The detailed explanations and practice tests were invaluable.</p>
+                    <p class="description">The innovative teaching methods and continuous support from this edutech company made a significant difference in my NEET preparation. Their resources and mentorship were exceptional."
+                    </p>
 
                     <button class="button">View More</button>
                   </div>
@@ -755,7 +795,7 @@
                   <div class="card-content">
                     <h2 class="name">Prithika Kiran
                     </h2>
-                    <p class="description">The innovative teaching methods and continuous support from this edutech company made a significant difference in my NEET preparation. Their resources and mentorship were exceptional."</p>
+                    <p class="description">Thanks to the expert guidance and interactive learning modules provided by this platform, I was able to excel in my JEE Main exams. The detailed explanations and practice tests were invaluable.</p>
 
                     <button class="button">View More</button>
                   </div>
@@ -1116,6 +1156,32 @@ With Infinite EduLocus, you gain access to top-notch educators regardless of geo
       },
     });
 
+  </script>
+  <script>
+    $('.counting').each(function() {
+      var $this = $(this),
+          countTo = $this.attr('data-count');
+      
+      $({ countNum: $this.text()}).animate({
+        countNum: countTo
+      },
+    
+      {
+    
+        duration: 3000,
+        easing:'linear',
+        step: function() {
+          $this.text(Math.floor(this.countNum));
+        },
+        complete: function() {
+          $this.text(this.countNum);
+          //alert('finished');
+        }
+    
+      });  
+      
+    
+    });
   </script>
 </body>
 
